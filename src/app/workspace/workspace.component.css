@@ -1,1 +1,8 @@
+.container {
+  display: flex;
+  background-color: #01014a;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+}
 

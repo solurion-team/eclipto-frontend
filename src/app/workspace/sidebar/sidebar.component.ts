@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {NgClass} from "@angular/common";
 import {ProjectCardComponent} from "./project-card/project-card.component";
 
@@ -14,14 +14,14 @@ import {ProjectCardComponent} from "./project-card/project-card.component";
 })
 export class SidebarComponent {
 
-  projects: {projectName: string, projectIconColor: string, isDone: boolean}[] = [
-    {projectName: "Eclipto", projectIconColor: "blue", isDone: true}
-  ]
+  @Output() isActiveChange: EventEmitter<boolean> = new EventEmitter<boolean>()
+  projects: {projectName: string, projectIconColor: string, isDone: boolean}[] = []
 
   isActive = false
 
   showSidebar() {
     this.isActive = !this.isActive
+    this.isActiveChange.emit(this.isActive)
   }
 
   addProject() {

@@ -1,0 +1,65 @@
+.background-for-project {
+  /*background-color: red;*/
+  height: 16vh;
+  width: 95vw;
+  float: right;
+  transition: transform 0.5s ease-in-out;
+  margin-left: 50px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  color: white;
+}
+
+.active {
+  transform: translateX(180px);
+}
+
+.header-for-project {
+  /*background-color: green;*/
+  height: 50%;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-for-project-text {
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+.square {
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: aqua;
+}
+
+.icon-color-change
+{
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background-color: #9900ff;
+}
+
+.fields {
+  padding-top: 12px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1em;
+  gap: 30px;
+}
+
+.fields-item {
+  transition: color 0.3s;
+  padding: 5px;
+}
+
+.fields-item:hover {
+  color: #8eafec;
+  border-bottom: 1px solid #8eafec;
+}

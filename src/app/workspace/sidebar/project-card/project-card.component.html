@@ -1,0 +1,9 @@
+<div class="card">
+  <div class="square" [style.background-color]=projectIconColor></div>
+  @if (isEditing) {
+    <input #projectNameInput class="input-card" type="text" [(ngModel)]="projectName"
+           (keyup)="onProcessControlKeys($event)" (blur)="onInputBlur()">
+  } @else {
+    <div class="text-card">{{projectName}}</div>
+  }
+</div>

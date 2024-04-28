@@ -1,1 +1,23 @@
-<p>login works!</p>
+<div class="background">
+  <div class="authorization-window">
+    <div class="header-for-authorization-window">
+      ECLIPTO
+    </div>
+
+    <div class="warning">
+      Войдите, чтобы продолжить
+    </div>
+
+    <form class="form" action="#" method="post">
+      <input [ngClass]="{'default-input':isError}" class="form-item form-field email" type="email" placeholder="Введите адрес электронной почты" required>
+      <input [ngClass]="{'default-input':isError}" class="form-item form-field password" type="password" placeholder="Введите пароль" required>
+      <div [ngClass]="{'class-hidden':!isError}" class="error-text">Неправильный логин или пароль</div>
+      <button class="form-item button-for-form" type="submit" (click)="onNextClick()">Продолжить</button>
+    </form>
+
+    <a class="link-for-registration" href="https://www.youtube.com/">
+      <button class="button-for-registration" type="button">Зарегистрироваться</button>
+    </a>
+
+  </div>
+</div>

@@ -15,7 +15,6 @@ export class ProjectCardComponent implements AfterViewInit {
   @Input() isEditing!: boolean;
   @Input() projectIconColor!: string;
   isBlurByControlKeys = false;
-  // @Output() onCardInited = new EventEmitter<number>();
   @Output() onRemoveCard = new EventEmitter<void>();
 
   @ViewChild('projectNameInput') projectNameInput!: ElementRef;
@@ -46,7 +45,6 @@ export class ProjectCardComponent implements AfterViewInit {
 
   initCard() {
     this.isEditing = false
-    // this.onCardInited.emit(projectName)
   }
 
   ngAfterViewInit(): void {
@@ -54,12 +52,6 @@ export class ProjectCardComponent implements AfterViewInit {
   }
 }
 
-
-// container: StringContainer = new StringContainer()
-// container.put("sadoifjasdoif")
-// console.log(container.value) // sadoifjasdoif
-// container.subscribe((str) => console.log(str))
-// container.put("xnjnj")
 
 
 

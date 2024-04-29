@@ -1,5 +1,5 @@
 <div class="container">
-  <app-sidebar (isActiveChange)="isActiveSidebar = $event"></app-sidebar>
-  <app-project [isActiveSidebar]="isActiveSidebar"></app-project>
+  <app-sidebar></app-sidebar>
+  <router-outlet></router-outlet>
 </div>
 

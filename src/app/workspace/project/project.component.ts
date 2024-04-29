@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { BoardComponent } from './board/board.component'
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [],
+  imports: [ BoardComponent ],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })

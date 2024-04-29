@@ -1,10 +1,8 @@
 .background-for-project {
-  /*background-color: red;*/
+  background-color: red;
   height: 16vh;
   width: 95vw;
-  float: right;
   transition: transform 0.5s ease-in-out;
-  margin-left: 50px;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
@@ -62,4 +60,18 @@
 .fields-item:hover {
   color: #8eafec;
   border-bottom: 1px solid #8eafec;
+}
+
+.project-workspace {
+  height: 84vh;
+  background-color: green;
+  /*display: flex;*/
+  /*flex-direction: row;*/
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 50px;
+  transition: transform 0.5s ease-in-out;
 }

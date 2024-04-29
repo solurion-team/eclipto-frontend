@@ -50,6 +50,10 @@ export class ProjectCardComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.projectNameInput.nativeElement.focus()
   }
+
+  OpenThisProject(): void {
+
+  }
 }
 
 

@@ -1,7 +1,14 @@
+.container {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  margin-left: 50px;
+  transition: transform 0.5s ease-in-out;
+}
+
 .background-for-project {
   background-color: red;
-  height: 16vh;
-  width: 95vw;
+  height: 100px;
   transition: transform 0.5s ease-in-out;
   display: flex;
   flex-direction: column;
@@ -9,12 +16,16 @@
   color: white;
 }
 
+.project-workspace {
+  height: 800px;
+  background-color: green;
+}
+
 .active {
   transform: translateX(180px);
 }
 
 .header-for-project {
-  /*background-color: green;*/
   height: 50%;
   display: inline-flex;
   flex-direction: row;
@@ -43,7 +54,7 @@
 }
 
 .fields {
-  padding-top: 12px;
+  margin-top: 10px;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
@@ -55,23 +66,11 @@
 .fields-item {
   transition: color 0.3s;
   padding: 5px;
+  text-decoration: none;
+  color: white;
 }
 
 .fields-item:hover {
   color: #8eafec;
   border-bottom: 1px solid #8eafec;
-}
-
-.project-workspace {
-  height: 84vh;
-  background-color: green;
-  /*display: flex;*/
-  /*flex-direction: row;*/
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 50px;
-  transition: transform 0.5s ease-in-out;
 }

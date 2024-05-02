@@ -15,6 +15,8 @@
   border-radius: 5px;
   padding: 30px;
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 
 .header-for-authorization-window {

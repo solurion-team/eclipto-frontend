@@ -13,45 +13,39 @@
   <div class="main-container">
       <div class="search-container">
         <h1 class="headingHome">Workspaces</h1>
-        <button class="newProject" (click)="createProject()">Создать проект</button>
-        <input class="search" type="text" placeholder="Search by Name" [(ngModel)]="searchQuery">
+        <button class="newProject" (click)="createProject()">Создать workspace</button>
+        <input class="search" type="text" placeholder="Поиск по имени workspace" [(ngModel)]="searchQuery">
       <table>
         <thead>
         <tr>
-          <th class="first-name">Name</th>
-          <th>Key</th>
-          <th>Type</th>
-          <th>Director</th>
+          <th class="first-name">Имя</th>
+          <th>Описание</th>
+          <th>Владелец</th>
         </tr>
         </thead>
         <tbody>
 
         <tr>
           <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>EF
           <td>Бизнес, управчляемый командой</td>
           <td>Костоев Мурат</td>
         </tr>
         <tr>
           <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>EF
           <td>Бизнес, управчляемый командой</td>
           <td>Костоев Мурат</td>
         </tr>
         <tr>
           <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>EF
           <td>Бизнес, управчляемый командой</td>
           <td>Костоев Мурат</td>
         </tr><tr>
           <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>EF
           <td>Бизнес, управчляемый командой</td>
           <td>Костоев Мурат</td>
         </tr>
         <tr>
           <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>EF
           <td>Бизнес, управчляемый командой</td>
           <td>Костоев Мурат</td>
         </tr>
@@ -64,8 +58,7 @@
             <span>{{ project.name }}</span>
           </div>
           </td>
-          <td>{{ project.key }}</td>
-          <td>{{ project.type }}</td>
+          <td>{{ project.description }}</td>
           <td>{{ project.director }}</td>
         </tr>
         </tbody>
@@ -81,4 +74,3 @@
 
 </body>
 </html>
-

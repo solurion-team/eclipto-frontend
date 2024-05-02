@@ -11,13 +11,13 @@ interface Project {
 
 @Component({
   selector: 'app-search',
-  templateUrl: './index.html',
+  template: '<a>homee</a>',
   standalone: true,
   imports: [
     NgForOf,
     FormsModule
   ],
-  styleUrls: ['./styles.css']
+  styleUrls: []
 })
 export class HomeComponent implements OnInit {
   // searchQuery: string = '';

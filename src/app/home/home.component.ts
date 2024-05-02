@@ -4,21 +4,20 @@ import {NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 
 interface Project {
+  description: string;
   director: string;
   name: string;
-  key: string;
-  type: string;
 }
 
 @Component({
   selector: 'app-search',
-  templateUrl: './home.component.html',
+  templateUrl: './index.html',
   standalone: true,
   imports: [
     NgForOf,
     FormsModule
   ],
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./styles.css']
 })
 export class SearchComponent implements OnInit {
   searchQuery: string = '';

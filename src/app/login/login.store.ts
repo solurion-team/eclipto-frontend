@@ -33,6 +33,11 @@ export class LoginStore extends ComponentStore<LoginState>{
 
   readonly email$ = this.select(state => state.email);
   readonly password$ = this.select(state => state.password);
+  readonly formVm$ = this.select({
+    email: this.email$,
+    password: this.password$,
+  })
+
   readonly isLoading$ = this.select(state => state.isLoading);
   readonly isError$ = this.select(state => state.isError);
   readonly isLoginCompleted$ = this.select(state => state.isLoginCompleted);

@@ -25,11 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(private readonly loginStore: LoginStore, private router: Router) {}
 
   ngOnInit() {
-    this.loginStore.email$.subscribe({
-      next: value => this.loginForm.patchValue({ email: value })
-    })
-    this.loginStore.password$.subscribe({
-      next: value => this.loginForm.patchValue({ password: value })
+    this.loginStore.formVm$.subscribe({
+      next: value => this.loginForm.patchValue(value)
     })
     this.loginStore.isLoginCompleted$.subscribe({
       next: value => value && this.navigateToHome()

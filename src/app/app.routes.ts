@@ -3,9 +3,11 @@ import {LoginComponent} from "./login/login.component";
 import {HomeComponent} from "./home/home.component";
 import {WorkspaceComponent} from "./workspace/workspace.component";
 import {workspaceRoutes} from "./workspace/workspace.routes";
+import {RegisterComponent} from "./register/register.component";
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'workspace/:id', component: WorkspaceComponent, children: workspaceRoutes },
   { path: '', redirectTo: '/login', pathMatch: 'full' },

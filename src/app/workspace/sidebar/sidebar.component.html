@@ -1,20 +1,16 @@
 <div class="sidebar" [class.sidebar-active]="state.isActive">
   <div class="header-sidebar">
     <div class="header-sidebar-text">Projects</div>
-    <div (click)="addProject()" class="plus">
+    <button (click)="addNewProject()" class="plus" [disabled]="state.isLoading">
       <span class="material-symbols-outlined">add</span>
-    </div>
+    </button>
     <div (click)="toggleActive()" class="icon">
       <span class="material-symbols-outlined" [class.icon-collapse]="state.isActive">chevron_right</span>
     </div>
   </div>
   <div class="card-container">
-    @for (project of state.projectCards; track $index) {
-      <app-project-card
-        [state]="project"
-        (onOpenProject)="openProject(project.id!)"
-        (onProjectCreated)="onProjectCreated($event)"
-        (onProjectCreationFailed)="removeProject($index)"></app-project-card>
+    @for (project of state.projectCards; track project.id) {
+      <app-project-card (click)="openProject(project.id)" [state]="project"></app-project-card>
     }
   </div>
 </div>

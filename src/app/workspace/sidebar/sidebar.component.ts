@@ -1,12 +1,11 @@
 import {Component, Output, EventEmitter, Input} from '@angular/core';
-import {NgClass} from "@angular/common";
+import {AsyncPipe, NgClass} from "@angular/common";
 import {ProjectCardComponent, ProjectCardState, ProjectCreatedEvent} from "./project-card/project-card.component";
-import {WorkspaceService} from "../workspace.service";
-import {first} from "rxjs";
-import {SidebarStore} from "./sidebar.store";
+import {WorkspaceStore} from "../workspace.store";
 
 export interface SidebarState {
   readonly projectCards: ProjectCardState[],
+  readonly isLoading: boolean,
   readonly isActive: boolean,
 }
 
@@ -15,7 +14,8 @@ export interface SidebarState {
   standalone: true,
   imports: [
     NgClass,
-    ProjectCardComponent
+    ProjectCardComponent,
+    AsyncPipe
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
@@ -23,29 +23,18 @@ export interface SidebarState {
 export class SidebarComponent {
   @Input() state!: SidebarState
 
-  readonly projectCards$ = this.sidebarStore.projectCards$
-  readonly isActive$ = this.sidebarStore.isActive$
-
-  constructor(private readonly sidebarStore: SidebarStore) {
+  constructor(private readonly workspaceStore: WorkspaceStore) {
   }
 
   toggleActive() {
-    this.sidebarStore.toggleActive()
+    this.workspaceStore.toggleActive()
   }
 
-  addProject() {
-    this.sidebarStore.addEditingProject()
+  addNewProject() {
+    this.workspaceStore.setIsAddNewProjectDialogActive(true)
   }
 
-  removeProject(index: number) {
-    this.sidebarStore.removeProjectCard(index)
-  }
-
-  openProject(number: number) {
-
-  }
-
-  onProjectCreated(event: ProjectCreatedEvent) {
-
+  openProject(projectId: number) {
+    this.workspaceStore.openProject(projectId);
   }
 }

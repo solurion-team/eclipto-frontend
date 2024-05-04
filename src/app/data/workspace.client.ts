@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {TokenService} from "./token.service";
+import {AuthService} from "./auth.service";
 
 
 export interface WorkspaceInfoDto {
@@ -30,32 +31,32 @@ export class WorkspaceClient {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly tokenService: TokenService
+    private readonly authService: AuthService
   ) {
 
   }
 
   getWorkspace(workspaceId: string): Observable<WorkspaceInfoDto> {
     return this.http.get<WorkspaceInfoDto>(`${this.API_URL}/v1/workspaces/${workspaceId}`, {
-      headers: this.tokenService.authTokenHeader
+      headers: this.authService.authHeader
     });
   }
 
   updateWorkspace(workspaceId: string, workspaceData: WorkspaceInfoDto): Observable<WorkspaceInfoDto> {
     return this.http.put<WorkspaceInfoDto>(`${this.API_URL}/v1/workspaces/${workspaceId}`, workspaceData, {
-      headers: this.tokenService.authTokenHeader
+      headers: this.authService.authHeader
     });
   }
 
   deleteWorkspace(workspaceId: string): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/v1/workspaces/${workspaceId}`, {
-      headers: this.tokenService.authTokenHeader,
+      headers: this.authService.authHeader,
     });
   }
 
   createWorkspace(workspaceData: WorkspaceInfoDto): Observable<WorkspaceInfoDto> {
     return this.http.post<WorkspaceInfoDto>(`${this.API_URL}/v1/workspaces`, workspaceData, {
-      headers: this.tokenService.authTokenHeader
+      headers: this.authService.authHeader
     });
   }
 }

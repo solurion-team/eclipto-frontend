@@ -64,39 +64,32 @@
 
 
 
-/* Стили для формы */
-form {
-  width: 100%;
-  background-color: red;
-  margin-left: 300px;
-  margin-top: 200px;
-}
-
-/* Стили для полей формы */
-mat-form-field {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
 /* Стили для кнопок */
 .button-container {
-  display: flex;
-  justify-content: space-between;
   margin-top: 20px;
 }
 
-/* Стили для кнопки "Close" */
-.button-container button:first-child {
-  background-color: #CCCCCC;
-  color: #FFFFFF;
+/* Стили для формы */
+form {
+  margin-top: 20px;
 }
 
-/* Стили для кнопки "Submit" */
-.button-container button:last-child {
-  background-color: #007bff;
-  color: #FFFFFF;
+/* Стили для поля ввода */
+mat-form-field {
+  width: 100%;
 }
 
+/* Стили для кнопки "Toggle Form" */
+button {
+  margin-right: 10px;
+}
+
+
+mat-dialog-content {
+
+  color: red;
+  background-color: #1bdcdc;
+}
 
 
 

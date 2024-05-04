@@ -13,6 +13,8 @@ import {RouterOutlet} from "@angular/router";
   styleUrl: './workspace.component.css'
 })
 export class WorkspaceComponent {
-
+  openProject() {
+    this.router.navigate(['./project/21'], {relativeTo: this.route}).then(r => {})
+  }
 }
 

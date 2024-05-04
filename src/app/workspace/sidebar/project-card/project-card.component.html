@@ -1,9 +1,9 @@
-<div (click)="openProject()" class="card">
-  <div class="square" [style.background-color]=projectIconColor></div>
-  @if (isEditing) {
-    <input #projectNameInput class="input-card" type="text" [(ngModel)]="projectName"
+<div (click)="onCardClick()" class="card">
+  <div class="square" [style.background-color]=state.iconColor></div>
+  @if (state.isEditing) {
+    <input #projectNameInput class="input-card" type="text" [(ngModel)]="state.name"
            (keyup)="onProcessControlKeys($event)" (blur)="onInputBlur()">
   } @else {
-    <div class="text-card">{{projectName}}</div>
+    <div class="text-card">{{state.name}}</div>
   }
 </div>

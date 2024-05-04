@@ -1,21 +1,21 @@
-
-  <div class="sidebar" [class.sidebar-active]="isActive">
-    <div class="header-sidebar">
-      <div class="header-sidebar-text">Projects</div>
-      <div (click)="addProject()" class="plus">
-        <span class="material-symbols-outlined">add</span>
-      </div>
-      <div (click)="showSidebar()" class="icon">
-        <span class="material-symbols-outlined" [class.icon-collapse]="isActive">chevron_right</span>
-      </div>
+<div class="sidebar" [class.sidebar-active]="state.isActive">
+  <div class="header-sidebar">
+    <div class="header-sidebar-text">Projects</div>
+    <div (click)="addProject()" class="plus">
+      <span class="material-symbols-outlined">add</span>
     </div>
-    <div class="card-container">
-      @for (project of projects; track $index) {
-        <app-project-card [projectName]="project.projectName"
-                          [projectIconColor]="project.projectIconColor"
-                          [isEditing]="!project.isDone"
-                          (onRemoveCard)="removeProject($index)"></app-project-card>
-      }
+    <div (click)="toggleActive()" class="icon">
+      <span class="material-symbols-outlined" [class.icon-collapse]="state.isActive">chevron_right</span>
     </div>
   </div>
+  <div class="card-container">
+    @for (project of state.projectCards; track $index) {
+      <app-project-card
+        [state]="project"
+        (onOpenProject)="openProject(project.id!)"
+        (onProjectCreated)="onProjectCreated($event)"
+        (onProjectCreationFailed)="removeProject($index)"></app-project-card>
+    }
+  </div>
+</div>
 

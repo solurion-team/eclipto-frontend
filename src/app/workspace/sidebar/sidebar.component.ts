@@ -1,8 +1,14 @@
 import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {NgClass} from "@angular/common";
-import {ProjectCardComponent} from "./project-card/project-card.component";
+import {ProjectCardComponent, ProjectCardState, ProjectCreatedEvent} from "./project-card/project-card.component";
 import {WorkspaceService} from "../workspace.service";
 import {first} from "rxjs";
+import {SidebarStore} from "./sidebar.store";
+
+export interface SidebarState {
+  readonly projectCards: ProjectCardState[],
+  readonly isActive: boolean,
+}
 
 @Component({
   selector: 'app-sidebar',
@@ -15,24 +21,31 @@ import {first} from "rxjs";
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  projects: {projectName: string, projectIconColor: string, isDone: boolean}[] = []
+  @Input() state!: SidebarState
 
-  isActive = false
+  readonly projectCards$ = this.sidebarStore.projectCards$
+  readonly isActive$ = this.sidebarStore.isActive$
 
-  constructor(private workspaceService: WorkspaceService) {
-    workspaceService.isSidebarActiveFlow.subscribe(isActive => this.isActive = isActive)
+  constructor(private readonly sidebarStore: SidebarStore) {
   }
 
-  showSidebar() {
-    this.workspaceService.switchActive()
+  toggleActive() {
+    this.sidebarStore.toggleActive()
   }
 
   addProject() {
-    this.projects.push({projectName: "", projectIconColor: "blue", isDone: false});
+    this.sidebarStore.addEditingProject()
   }
 
   removeProject(index: number) {
-    this.projects.splice(index, 1);
+    this.sidebarStore.removeProjectCard(index)
   }
 
+  openProject(number: number) {
+
+  }
+
+  onProjectCreated(event: ProjectCreatedEvent) {
+
+  }
 }

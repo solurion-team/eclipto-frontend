@@ -1,11 +1,38 @@
-<dialog #modal>
-  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
-    <input type="text" class="name-project" formControlName="name" placeholder="Название проекта">
-    <input type="text" class="project-description" formControlName="description" placeholder="Описание проекта">
+<!--<dialog #modal>-->
+<!--  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">-->
+<!--    <input type="text" class="name-project" formControlName="name" placeholder="Название проекта">-->
+<!--    <input type="text" class="project-description" formControlName="description" placeholder="Описание проекта">-->
+<!--    <div class="button-container">-->
+<!--      <button class="button-for-close" type="button" (click)="closeModal()">Close</button>-->
+<!--      <button class="button-for-submit" type="submit" value="send">Submit</button>-->
+<!--    </div>-->
+<!--  </form>-->
+<!--</dialog>-->
+
+
+
+
+
+
+<mat-dialog-content>
+  <form [formGroup]="projectForm" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="name" placeholder="Название проекта">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <textarea matInput formControlName="description" placeholder="Описание проекта"></textarea>
+    </mat-form-field>
+
     <div class="button-container">
-      <button class="button-for-close" type="button" (click)="closeModal()">Close</button>
-      <button class="button-for-submit" type="submit" value="send">Submit</button>
+      <button mat-button type="button" (click)="closeModal()">Close</button>
+      <button mat-raised-button type="submit" [disabled]="!projectForm.valid">Submit</button>
     </div>
   </form>
+</mat-dialog-content>
 
-</dialog>
+
+
+
+
+

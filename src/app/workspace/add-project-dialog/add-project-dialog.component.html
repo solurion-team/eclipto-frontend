@@ -1,0 +1,14 @@
+<dialog #modal>
+  <form>
+    <input type="text" class="name-project" placeholder="Название проекта">
+    <textarea class="project-description" placeholder="Описание проекта"></textarea>
+    <div class="button-container">
+      <button class="button-for-close" value="cancel">Close</button>
+      <button class="button-for-submit" type="submit" value="send">Submit</button>
+    </div>
+  </form>
+</dialog>
+
+<button (click)="openModal()" class="button-test">
+  Окно
+</button>

@@ -1,5 +1,5 @@
 <div class="container">
-  <app-sidebar></app-sidebar>
+  <app-sidebar [state]="(sidebarState$ | async)!"></app-sidebar>
   <router-outlet></router-outlet>
 </div>
 

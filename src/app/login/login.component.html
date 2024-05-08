@@ -8,7 +8,7 @@
       Войдите, чтобы продолжить
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <input [class.default-input]="isError$ | async"
              class="form-item form-field email"
              name="email"

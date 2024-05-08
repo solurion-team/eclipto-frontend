@@ -1,5 +1,7 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {workspaceRoutes} from "../../workspace.routes";
 
 @Component({
   selector: 'app-project-card',
@@ -18,6 +20,9 @@ export class ProjectCardComponent implements AfterViewInit {
   @Output() onRemoveCard = new EventEmitter<void>();
 
   @ViewChild('projectNameInput') projectNameInput!: ElementRef;
+
+  constructor(private router: Router, private route: ActivatedRoute) {
+  }
 
   onProcessControlKeys(event: KeyboardEvent) {
     console.log(event.key)
@@ -49,6 +54,10 @@ export class ProjectCardComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.projectNameInput.nativeElement.focus()
+  }
+
+  openProject() {
+    this.router.navigate(['./project/21'], {relativeTo: this.route}).then(r => {})
   }
 }
 

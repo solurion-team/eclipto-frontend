@@ -5,6 +5,7 @@ import {exhaustMap, finalize, Observable, tap} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {RegisterService} from "./register.service";
+import {AuthService} from "../data/auth.service";
 
 export interface RegisterState {
   firstName: string;
@@ -36,8 +37,7 @@ const initialState: RegisterState = {
 @Injectable()
 export class RegisterStore extends ComponentStore<RegisterState>{
   constructor(
-    private readonly registerService: RegisterService,
-    private readonly cookieService: CookieService
+    private readonly authService: AuthService,
   ) {
     super(initialState);
   }
@@ -60,13 +60,12 @@ export class RegisterStore extends ComponentStore<RegisterState>{
   readonly register = this.effect((userData$: Observable<UserData>) => {
     return userData$.pipe(
       tap((userData) => this.patchState({...userData, isLoading: true, isError: false})),
-      exhaustMap((userData) => this.registerService.register(
-        {first_name: userData.firstName, last_name: userData.lastName, ...userData}
+      exhaustMap((userData) => this.authService.register(
+        {first_name: userData.firstName, last_name: userData.lastName, email: userData.email, password: userData.password}
       ).pipe(
         finalize(() => this.patchState({isLoading: false})),
         tapResponse(
           (response) => {
-            this.cookieService.set("access_token", response.access_token, {secure: true, sameSite: "Strict"})
             this.patchState({isRegisterCompleted: true})
           },
           (error: HttpErrorResponse) => {

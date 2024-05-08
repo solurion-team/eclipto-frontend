@@ -9,8 +9,8 @@ export class TokenService {
   private readonly ACCESS_TOKEN_KEY = 'access_token';
   constructor(private readonly cookieService: CookieService) { }
 
-  public isTokenValid(token: string): boolean {
-    return true; // TODO add logic
+  public isTokenExists(): boolean {
+    return this.cookieService.check(this.ACCESS_TOKEN_KEY); // TODO add logic
   }
 
   public saveToken(token: string) {
@@ -19,11 +19,5 @@ export class TokenService {
 
   public get token(): string {
    return this.cookieService.get(this.ACCESS_TOKEN_KEY)
-  }
-
-  public get authTokenHeader(): HttpHeaders {
-    return new HttpHeaders({
-      'Authorization': `Bearer ${this.token}`
-    })
   }
 }

@@ -1,38 +1,42 @@
 import {Component, Output, EventEmitter, Input} from '@angular/core';
-import {NgClass} from "@angular/common";
-import {ProjectCardComponent} from "./project-card/project-card.component";
-import {WorkspaceService} from "../workspace.service";
-import {first} from "rxjs";
+import {AsyncPipe, NgClass} from "@angular/common";
+import {ProjectCardComponent, ProjectCardState, ProjectCreatedEvent} from "./project-card/project-card.component";
+import {WorkspaceStore} from "../workspace.store";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {AddProjectDialogComponent} from "../add-project-dialog/add-project-dialog.component";
+
+export interface SidebarState {
+  readonly projectCards: ProjectCardState[],
+  readonly isLoading: boolean,
+  readonly isActive: boolean,
+}
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [
     NgClass,
-    ProjectCardComponent
+    ProjectCardComponent,
+    AsyncPipe
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent {
-  projects: {projectName: string, projectIconColor: string, isDone: boolean}[] = []
+  @Input() state!: SidebarState
 
-  isActive = false
-
-  constructor(private workspaceService: WorkspaceService) {
-    workspaceService.isSidebarActiveFlow.subscribe(isActive => this.isActive = isActive)
+  constructor(private readonly workspaceStore: WorkspaceStore) {
   }
 
-  showSidebar() {
-    this.workspaceService.switchActive()
+  toggleActive() {
+    this.workspaceStore.toggleActive()
   }
 
-  addProject() {
-    this.projects.push({projectName: "", projectIconColor: "blue", isDone: false});
+  addNewProject() {
+    this.workspaceStore.openAddProjectDialog()
   }
 
-  removeProject(index: number) {
-    this.projects.splice(index, 1);
+  openProject(projectId: number) {
+    this.workspaceStore.openProject(projectId);
   }
-
 }

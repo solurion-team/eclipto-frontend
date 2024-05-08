@@ -67,7 +67,7 @@
 
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatDialog, MatDialogActions, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
@@ -84,11 +84,12 @@ import {CommonModule} from "@angular/common";
     ReactiveFormsModule,
     MatInput,
     MatButton,
-    MatDialogActions
+    MatDialogActions,
+    MatDialogClose
   ],
   styleUrls: ['./add-project-dialog.component.css'],
   providers: [
-    { provide: MatDialogRef, useValue: AddProjectDialogComponent } // Предоставляем пустой объект в качестве MatDialogRef
+    { provide: MatDialogRef, useValue: AddProjectDialogComponent }
   ]
 })
 
@@ -108,7 +109,7 @@ export class AddProjectDialogComponent {
   }
 
   closeModal() {
-    this.dialog.closeAll(); // Закрыть все открытые диалоговые окна
+    this.dialog.closeAll();
   }
 
   submitForm() {
@@ -116,7 +117,7 @@ export class AddProjectDialogComponent {
       console.log('Form submitted:', this.projectForm.value);
       this.projectForm.reset();
       this.showForm = false;
-      this.dialog.closeAll(); // Закрыть все открытые диалоговые окна после успешной отправки формы
+      this.dialog.closeAll();
     } else {
       console.error('Form is invalid.');
     }

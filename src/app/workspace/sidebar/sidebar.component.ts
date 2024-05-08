@@ -2,6 +2,8 @@ import {Component, Output, EventEmitter, Input} from '@angular/core';
 import {AsyncPipe, NgClass} from "@angular/common";
 import {ProjectCardComponent, ProjectCardState, ProjectCreatedEvent} from "./project-card/project-card.component";
 import {WorkspaceStore} from "../workspace.store";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {AddProjectDialogComponent} from "../add-project-dialog/add-project-dialog.component";
 
 export interface SidebarState {
   readonly projectCards: ProjectCardState[],
@@ -31,7 +33,7 @@ export class SidebarComponent {
   }
 
   addNewProject() {
-    this.workspaceStore.setIsAddNewProjectDialogActive(true)
+    this.workspaceStore.openAddProjectDialog()
   }
 
   openProject(projectId: number) {

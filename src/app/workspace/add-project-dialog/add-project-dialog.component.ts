@@ -66,7 +66,7 @@
 
 
 import { Component } from '@angular/core';
-import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
@@ -87,40 +87,26 @@ import {CommonModule} from "@angular/common";
     MatDialogActions,
     MatDialogClose
   ],
-  styleUrls: ['./add-project-dialog.component.css'],
-  providers: [
-    { provide: MatDialogRef, useValue: AddProjectDialogComponent }
-  ]
+  styleUrls: ['./add-project-dialog.component.css']
 })
 
 export class AddProjectDialogComponent {
-  projectForm: FormGroup;
-  showForm: boolean = false;
+  projectForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    description: new FormControl('', [Validators.required])
+  });
 
-  constructor(private formBuilder: FormBuilder, private dialog: MatDialog) {
-    this.projectForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: ['']
-    });
-  }
-
-  toggleForm() {
-    this.showForm = !this.showForm;
-  }
-
-  closeModal() {
-    this.dialog.closeAll();
+  constructor(private readonly dialogRef: MatDialogRef<AddProjectDialogComponent>) {
   }
 
   submitForm() {
-    if (this.projectForm.valid) {
-      console.log('Form submitted:', this.projectForm.value);
-      this.projectForm.reset();
-      this.showForm = false;
-      this.dialog.closeAll();
-    } else {
-      console.error('Form is invalid.');
-    }
+    this.dialogRef.close(
+      { name: this.projectForm.value.name, description: this.projectForm.value.description }
+    );
+  }
+
+  closeDialog() {
+    this.dialogRef.close()
   }
 }
 

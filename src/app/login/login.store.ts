@@ -5,6 +5,7 @@ import {exhaustMap, finalize, Observable, tap} from "rxjs";
 import {CookieService} from "ngx-cookie-service";
 import {LoginService} from "./login.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {AuthService} from "../data/auth.service";
 
 export interface LoginState {
   email: string;
@@ -25,8 +26,7 @@ const initialState: LoginState = {
 @Injectable()
 export class LoginStore extends ComponentStore<LoginState>{
   constructor(
-    private readonly loginService: LoginService,
-    private readonly cookieService: CookieService
+    private readonly authService: AuthService,
   ) {
     super(initialState);
   }
@@ -45,11 +45,10 @@ export class LoginStore extends ComponentStore<LoginState>{
   readonly login = this.effect((credentials$: Observable<{email: string, password: string}>) => {
     return credentials$.pipe(
       tap((credentials) => this.patchState({...credentials, isLoading: true, isError: false})),
-      exhaustMap((credentials) => this.loginService.login(credentials).pipe(
+      exhaustMap((credentials) => this.authService.login(credentials).pipe(
         finalize(() => this.patchState({isLoading: false})),
         tapResponse(
           (response) => {
-            this.cookieService.set("access_token", response.access_token, {secure: true, sameSite: "Strict"})
             this.patchState({isLoginCompleted: true})
           },
           (error: HttpErrorResponse) => {

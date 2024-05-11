@@ -1,5 +1,3 @@
-<p>board works!</p>
-<div class="background-for-board">
 <!--  <div class="example-container">-->
 <!--    <h2>To do</h2>-->
 
@@ -31,13 +29,18 @@
 <!--      }-->
 <!--    </div>-->
 <!--  </div>-->
+<div class="background-for-board">
 
   <div class="task-column">
     <span class="title-for-column">Title</span>
-      <div class="task-card">
+    <mat-button-toggle class="create-task-card">
+      <span class="material-symbols-outlined">add</span>
+      <span class="text-create">Создать</span>
+    </mat-button-toggle>
+      <mat-card class="task-card">
           <div class="task-card-header">Name</div>
           <div class="task-card-priority">medium</div>
-      </div>
+      </mat-card>
   </div>
 
 </div>

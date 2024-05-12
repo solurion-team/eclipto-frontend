@@ -4,6 +4,8 @@ import {ProjectCardComponent, ProjectCardState, ProjectCreatedEvent} from "./pro
 import {WorkspaceStore} from "../workspace.store";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AddProjectDialogComponent} from "../add-project-dialog/add-project-dialog.component";
+import {MatIcon} from "@angular/material/icon";
+import {MatButton, MatFabButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
 
 export interface SidebarState {
   readonly projectCards: ProjectCardState[],
@@ -17,7 +19,12 @@ export interface SidebarState {
   imports: [
     NgClass,
     ProjectCardComponent,
-    AsyncPipe
+    AsyncPipe,
+    MatIcon,
+    MatMiniFabButton,
+    MatButton,
+    MatIconButton,
+    MatFabButton
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'

@@ -5,6 +5,7 @@
   flex-direction: row;
   background-color: #01014a;
   color: black;
+  gap: 10px;
 }
 
 /*div {*/
@@ -23,13 +24,14 @@
 }
 
 .title-for-column {
-  font-size: 1.1em;
-  font-weight: 500;
+  font-size: 1.4em;
+  font-weight: 600;
   height: 30px;
   /*background-color: #3131ff;*/
   align-items: center;
   display: flex;
   justify-content: center;
+  margin-bottom: 5px;
 }
 
 .task-card {
@@ -51,18 +53,20 @@
 }
 
 .create-task-card {
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   font-weight: 500;
-  /*background-color: #c80505;*/
   margin: 0 10px;
   border: none;
 }
 
 .text-create {
-  margin-left: 10px;
+  margin-left: 2px;
   font-weight: 500;
+  /*background-color: red;*/
+  vertical-align: middle;
+  align-self: center;
 }
 
 /*.example-container {*/

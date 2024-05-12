@@ -1,12 +1,16 @@
 <div class="sidebar" [class.sidebar-active]="state.isActive">
   <div class="header-sidebar">
     <div class="header-sidebar-text">Projects</div>
-    <button (click)="addNewProject()" class="plus" [disabled]="state.isLoading">
-      <span class="material-symbols-outlined">add</span>
+<!--    <button (click)="addNewProject()" class="plus" [disabled]="state.isLoading">-->
+<!--      <span class="material-symbols-outlined">add</span>-->
+<!--    </button>-->
+    <button mat-mini-fab color="surface" (click)="addNewProject()" class="plus" [disabled]="state.isLoading">
+      <mat-icon>add</mat-icon>
     </button>
-    <div (click)="toggleActive()" class="icon">
-      <span class="material-symbols-outlined" [class.icon-collapse]="state.isActive">chevron_right</span>
-    </div>
+    <button mat-mini-fab color="surface" (click)="toggleActive()" class="icon">
+      <mat-icon>chevron_right</mat-icon>
+<!--      @if (state.isActive) {[class.]}-->
+    </button>
   </div>
   <div class="card-container">
     @for (project of state.projectCards; track project.id) {

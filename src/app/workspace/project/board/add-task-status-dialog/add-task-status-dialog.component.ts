@@ -6,6 +6,11 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {AddProjectDialogComponent} from "../../../add-project-dialog/add-project-dialog.component";
 
+export interface AddTaskStatusData {
+  name: string
+  tint: string
+}
+
 @Component({
   selector: 'app-add-task-status-dialog',
   standalone: true,
@@ -23,18 +28,19 @@ import {AddProjectDialogComponent} from "../../../add-project-dialog/add-project
   styleUrl: './add-task-status-dialog.component.css'
 })
 export class AddTaskStatusDialogComponent {
-  taskForm = new FormGroup({
+  taskStatusForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    description: new FormControl('', [Validators.required])
   });
 
   constructor(private readonly dialogRef: MatDialogRef<AddProjectDialogComponent>) {
   }
 
   submitForm() {
-    this.dialogRef.close(
-      { name: this.taskForm.value.name, description: this.taskForm.value.description }
-    );
+    const data: AddTaskStatusData = {
+      name: this.taskStatusForm.value.name!,
+      tint: "#3b62f3"
+    }
+    this.dialogRef.close(data);
   }
 
   closeDialog() {

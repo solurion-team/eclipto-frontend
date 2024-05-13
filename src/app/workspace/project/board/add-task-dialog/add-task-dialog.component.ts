@@ -1,11 +1,26 @@
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
-import {MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle} from "@angular/material/dialog";
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle
+} from "@angular/material/dialog";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {AddProjectDialogComponent} from "../../../add-project-dialog/add-project-dialog.component";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {Priority} from "../../../../client/model/priority";
+
+export interface AddTaskData {
+  title: string
+  description: string
+  priority: Priority
+  assignedUserId?: number
+  taskStatusId: number
+}
 
 @Component({
   selector: 'app-add-task-dialog',
@@ -27,18 +42,26 @@ import {MatOption, MatSelect} from "@angular/material/select";
   styleUrl: './add-task-dialog.component.css'
 })
 export class AddTaskDialogComponent {
-  projectForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(1)]),
-    description: new FormControl('', [Validators.required])
+  taskForm = new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    description: new FormControl('', []),
+    priority: new FormControl<Priority>('medium', [Validators.required])
   });
 
-  constructor(private readonly dialogRef: MatDialogRef<AddProjectDialogComponent>) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: {taskStatusId: number},
+    private readonly dialogRef: MatDialogRef<AddProjectDialogComponent>
+  ) {
   }
 
   submitForm() {
-    this.dialogRef.close(
-      { name: this.projectForm.value.name, description: this.projectForm.value.description }
-    );
+    const data: AddTaskData = {
+      title: this.taskForm.value.title!,
+      description: this.taskForm.value.description!,
+      priority: this.taskForm.value.priority!,
+      taskStatusId: this.data.taskStatusId
+    }
+    this.dialogRef.close(data);
   }
 
   closeDialog() {

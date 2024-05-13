@@ -1,7 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
-import {workspaceRoutes} from "../../workspace.routes";
 
 export interface ProjectCardState {
   readonly id: number,

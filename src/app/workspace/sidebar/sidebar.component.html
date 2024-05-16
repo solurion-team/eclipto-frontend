@@ -8,14 +8,14 @@
       <mat-icon>add</mat-icon>
     </button>
     <button mat-mini-fab color="surface" (click)="toggleActive()" class="icon">
-      <mat-icon>chevron_right</mat-icon>
-<!--      @if (state.isActive) {[class.]}-->
+      <mat-icon [class.icon-collapse]="state.isActive">chevron_right</mat-icon>
+<!--      @if (state.isActive) {[class]}-->
     </button>
   </div>
-  <div class="card-container">
+  <mat-button-toggle-group aria-orientation="vertical" class="card-container" [hideSingleSelectionIndicator]="true">
     @for (project of state.projectCards; track project.id) {
-      <app-project-card (click)="openProject(project.id)" [state]="project"></app-project-card>
+        <app-project-card (click)="openProject(project.id)" [state]="project"></app-project-card>
     }
-  </div>
+  </mat-button-toggle-group>
 </div>
 

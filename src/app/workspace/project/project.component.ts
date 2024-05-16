@@ -1,16 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink, RouterOutlet} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {WorkspaceService} from "../workspace.service";
 import {WorkspaceStore} from "../workspace.store";
 import {AsyncPipe} from "@angular/common";
 import {ProjectStore} from "./project.store";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {provideComponentStore} from "@ngrx/component-store";
+import {MatButtonToggle, MatButtonToggleGroup} from "@angular/material/button-toggle";
 
 @Component({
   selector: 'app-project',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, AsyncPipe, MatProgressSpinner],
+  imports: [RouterOutlet, RouterLink, AsyncPipe, MatProgressSpinner, MatButtonToggleGroup, RouterLinkActive, MatButtonToggle],
   providers: [provideComponentStore(ProjectStore)],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'

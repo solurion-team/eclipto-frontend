@@ -13,6 +13,8 @@ import {MatInput} from "@angular/material/input";
 import {AddProjectDialogComponent} from "../../../add-project-dialog/add-project-dialog.component";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {Priority} from "../../../../client/model/priority";
+import {MatDatepickerToggle} from "@angular/material/datepicker";
+
 
 export interface AddTaskData {
   title: string
@@ -36,7 +38,8 @@ export interface AddTaskData {
     MatSelect,
     MatOption,
     MatDialogTitle,
-    MatLabel
+    MatLabel,
+    MatDatepickerToggle,
   ],
   templateUrl: './add-task-dialog.component.html',
   styleUrl: './add-task-dialog.component.css'
@@ -45,7 +48,8 @@ export class AddTaskDialogComponent {
   taskForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(1)]),
     description: new FormControl('', []),
-    priority: new FormControl<Priority>('medium', [Validators.required])
+    priority: new FormControl<Priority>('medium', [Validators.required]),
+    // date: new FormControl('', [])
   });
 
   constructor(
@@ -59,6 +63,7 @@ export class AddTaskDialogComponent {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description!,
       priority: this.taskForm.value.priority!,
+      // date: this.taskForm.value.date,
       taskStatusId: this.data.taskStatusId
     }
     this.dialogRef.close(data);

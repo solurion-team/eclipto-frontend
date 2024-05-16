@@ -9,12 +9,12 @@
         <div class="header-for-project-text">{{name$ | async}}</div>
         <!--      <div class="icon-color-change"></div>-->
       </div>
-      <div class="fields">
-        <a routerLink="./board" class="fields-item">Board</a>
-        <a routerLink="./list" class="fields-item">List</a>
-        <a routerLink="./calendar" class="fields-item">Calendar</a>
-        <a routerLink="./settings" class="fields-item">Project settings</a>
-      </div>
+      <mat-button-toggle-group class="fields" appearance="legacy" [hideSingleSelectionIndicator]="true">
+        <mat-button-toggle routerLink="./board" class="fields-item">Board</mat-button-toggle>
+        <mat-button-toggle routerLink="./list" class="fields-item">List</mat-button-toggle>
+        <mat-button-toggle routerLink="./calendar" class="fields-item">Calendar</mat-button-toggle>
+        <mat-button-toggle routerLink="./settings" class="fields-item">Project settings</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
 
     <div class="project-workspace">

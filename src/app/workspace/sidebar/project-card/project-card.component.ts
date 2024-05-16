@@ -1,5 +1,8 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {FormsModule} from "@angular/forms";
+import {MatCard, MatCardContent} from "@angular/material/card";
+import {MatIcon} from "@angular/material/icon";
+import {MatButtonToggle} from "@angular/material/button-toggle";
 
 export interface ProjectCardState {
   readonly id: number,
@@ -16,7 +19,11 @@ export interface ProjectCreatedEvent {
   selector: 'app-project-card',
   standalone: true,
   imports: [
-    FormsModule
+    FormsModule,
+    MatCard,
+    MatIcon,
+    MatCardContent,
+    MatButtonToggle
   ],
   templateUrl: './project-card.component.html',
   styleUrl: './project-card.component.css'

@@ -43,7 +43,6 @@ export class ProjectStore extends ComponentStore<ProjectState> {
         tapResponse(
           (projectInfoDto) => {
             this.patchState((state) => {
-              console.log('Loaded? ' + state.isLoaded)
               return {id: projectId, name: projectInfoDto.name, tint: projectInfoDto.tint, isLoaded: true}
             })
           },

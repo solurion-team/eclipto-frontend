@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {WorkspaceService} from "../workspace.service";
 import {WorkspaceStore} from "../workspace.store";
 import {AsyncPipe} from "@angular/common";
 import {ProjectStore} from "./project.store";

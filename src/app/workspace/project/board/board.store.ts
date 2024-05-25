@@ -1,17 +1,17 @@
-import {Injectable} from "@angular/core";
-import {ComponentStore} from "@ngrx/component-store";
-import {exhaustMap, Observable, Subject, tap, withLatestFrom} from "rxjs";
-import {tapResponse} from "@ngrx/operators";
-import {HttpErrorResponse} from "@angular/common/http";
-import {UserIconState} from "../../../common/user-icon/user-icon.component";
-import {ProjectStore} from "../project.store";
-import {AddTaskData} from "./add-task-dialog/add-task-dialog.component";
-import {AddTaskStatusData} from "./add-task-status-dialog/add-task-status-dialog.component";
-import {TaskService} from "../../../client/api/task.service";
-import {CredentialsService} from "../../../data/credentials.service";
-import {TaskStatusDto} from "../../../client/model/taskStatusDto";
-import {TaskLiteDto} from "../../../client/model/taskLiteDto";
-import {Priority} from "../../../client/model/priority";
+import { Injectable } from "@angular/core";
+import { ComponentStore } from "@ngrx/component-store";
+import {EMPTY, exhaustMap, Observable, Subject, tap, withLatestFrom} from "rxjs";
+import { tapResponse } from "@ngrx/operators";
+import { HttpErrorResponse } from "@angular/common/http";
+import { UserIconState } from "../../../common/user-icon/user-icon.component";
+import { ProjectStore } from "../project.store";
+import { AddTaskData } from "./add-task-dialog/add-task-dialog.component";
+import { AddTaskStatusData } from "./add-task-status-dialog/add-task-status-dialog.component";
+import { TaskService } from "../../../client/api/task.service";
+import { CredentialsService } from "../../../data/credentials.service";
+import { TaskStatusDto } from "../../../client/model/taskStatusDto";
+import { TaskLiteDto } from "../../../client/model/taskLiteDto";
+import { Priority } from "../../../client/model/priority";
 
 export interface BoardState {
   readonly taskStatuses: TaskStatusContainer[]
@@ -123,6 +123,19 @@ export class BoardStore extends ComponentStore<BoardState> {
       ))
     )
   })
+
+  readonly loadTaskById = (taskId: number): Observable<TaskCard> => {
+    return this.taskService.getTask(taskId).pipe(
+      tapResponse(
+        (task) => task,
+        (error: HttpErrorResponse) => {
+          console.error('Error loading task', error);
+          return EMPTY;
+        }
+      )
+    );
+  };
+
 
   private mapToTaskStatusContainer(taskStatusDto: TaskStatusDto): TaskStatusContainer {
     return {

@@ -20,11 +20,19 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <input matInput type="datetime-local" placeholder="Введите дату">
+      <mat-label>Введите дату</mat-label>
+      <input matInput formControlName="date" readonly (focus)="openCalendar()" [value]="selectedDate | date:'yyyy-MM-dd'">
     </mat-form-field>
+
+    <mat-card *ngIf="calendarVisible" class="demo-inline-calendar-card">
+      <mat-calendar [(selected)]="selectedDate" (selectedChange)="saveDate()"></mat-calendar>
+    </mat-card>
   </form>
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Close</button>
   <button mat-raised-button color="primary" type="submit" [disabled]="!taskForm.valid" (click)="submitForm()">Create</button>
 </mat-dialog-actions>
+
+

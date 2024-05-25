@@ -1,34 +1,3 @@
-<!--  <div class="example-container">-->
-<!--    <h2>To do</h2>-->
-
-<!--    <div-->
-<!--      cdkDropList-->
-<!--      #todoList="cdkDropList"-->
-<!--      [cdkDropListData]="todo"-->
-<!--      [cdkDropListConnectedTo]="[doneList]"-->
-<!--      class="example-list"-->
-<!--      (cdkDropListDropped)="drop($event)">-->
-<!--      @for (item of todo; track item) {-->
-<!--        <div class="example-box" cdkDrag>{{item}}</div>-->
-<!--      }-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="example-container">-->
-<!--    <h2>Done</h2>-->
-
-<!--    <div-->
-<!--      cdkDropList-->
-<!--      #doneList="cdkDropList"-->
-<!--      [cdkDropListData]="done"-->
-<!--      [cdkDropListConnectedTo]="[todoList]"-->
-<!--      class="example-list"-->
-<!--      (cdkDropListDropped)="drop($event)">-->
-<!--      @for (item of done; track item) {-->
-<!--        <div class="example-box" cdkDrag>{{item}}</div>-->
-<!--      }-->
-<!--    </div>-->
-<!--  </div>-->
 <div class="background-for-board">
   @for (taskStatus of taskStatuses$ | async; track taskStatus.id) {
     <div class="task-column">
@@ -39,8 +8,26 @@
       </button>
       @for (task of taskStatus.tasks; track task.id) {
         <mat-card class="task-card">
-          <div class="task-card-header">{{task.title}}</div>
-          <div class="task-card-priority">{{task.priority}}</div>
+          <div class="task-card-content">
+            <div class="task-card-header">
+              <span class="task-title">{{task.title}}</span>
+              <button mat-icon-button [matMenuTriggerFor]="menu" class="task-card-menu">
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+            </div>
+            <div class="task-card-priority">{{task.priority}}</div>
+
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openEditTaskDialog(task.id)">
+                <mat-icon>edit</mat-icon>
+                <span>Редактировать</span>
+              </button>
+              <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Удалить карточку</span>
+              </button>
+            </mat-menu>
+          </div>
         </mat-card>
       }
     </div>
@@ -48,6 +35,39 @@
   <button mat-mini-fab color="surface" class="add-task-column" (click)="openAddTaskStatusDialog()">
     <mat-icon>add</mat-icon>
   </button>
-
 </div>
+
+
+
+<!--<div class="background-for-board">-->
+<!--  <div *ngFor="let taskStatus of taskStatuses; let i = index" class="task-column">-->
+<!--    <span class="title-for-column">{{ taskStatus.name }}</span>-->
+<!--    <button mat-raised-button class="create-task-card" (click)="openAddTaskDialog(i)">-->
+<!--      <mat-icon>add</mat-icon>-->
+<!--      <span class="text-create">Создать</span>-->
+<!--    </button>-->
+<!--    <div *ngFor="let task of taskStatus.tasks; let j = index" class="task-card-container">-->
+<!--      <mat-card class="task-card" (click)="openEditTaskDialog(i, j)">-->
+<!--        <div class="task-card-header">{{ task.title }}</div>-->
+<!--        <div class="task-card-priority">{{ task.priority }}</div>-->
+<!--      </mat-card>-->
+<!--      <button mat-icon-button [matMenuTriggerFor]="menu" class="task-card-menu">-->
+<!--        <mat-icon>more_vert</mat-icon>-->
+<!--      </button>-->
+<!--      <mat-menu #menu="matMenu">-->
+<!--        <button mat-menu-item (click)="openEditTaskDialog(i, j)">-->
+<!--          <mat-icon>edit</mat-icon>-->
+<!--          <span>Редактировать</span>-->
+<!--        </button>-->
+<!--        <button mat-menu-item (click)="deleteTask(i, j)">-->
+<!--          <mat-icon>delete</mat-icon>-->
+<!--          <span>Удалить карточку</span>-->
+<!--        </button>-->
+<!--      </mat-menu>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <button mat-mini-fab color="primary" class="add-task-column" (click)="openAddTaskStatusDialog()">-->
+<!--    <mat-icon>add</mat-icon>-->
+<!--  </button>-->
+<!--</div>-->
 

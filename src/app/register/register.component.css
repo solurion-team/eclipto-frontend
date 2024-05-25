@@ -1,3 +1,122 @@
+/*.background {*/
+/*  background-image: linear-gradient(to bottom, #01014a, #000080);*/
+/*  height: 100vh;*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*}*/
+
+/*.authorization-window {*/
+/*  width: 90%;*/
+/*  max-width: 400px;*/
+/*  background-color: #251e1e;*/
+/*  border-radius: 5px;*/
+/*  padding: 30px;*/
+/*  color: #ffffff;*/
+/*}*/
+
+/*.header-for-authorization-window {*/
+/*  font-size: 1.3em;*/
+/*  font-weight: 700;*/
+/*  margin-bottom: 20px;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.warning {*/
+/*  font-size: 1.1em;*/
+/*  font-weight: 600;*/
+/*  text-align: center;*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/*.form {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  gap: 10px;*/
+/*  background-color: white;*/
+/*}*/
+
+/*.mat-form-field {*/
+/*  width: 100%;*/
+/*}*/
+
+/*!*.form-item {*!*/
+/*!*  height: 40px;*!*/
+/*!*  border-radius: 5px;*!*/
+/*!*  border: 2px solid #3a3535;*!*/
+/*!*  background-color: #ffffff00;*!*/
+/*!*  color: #ffffff;*!*/
+/*!*  padding: 0 10px;*!*/
+/*!*  transition: border-color 0.3s linear;*!*/
+/*!*}*!*/
+
+/*!*.form-item:focus {*!*/
+/*!*  outline: none;*!*/
+/*!*  border-color: #3131ff;*!*/
+/*!*}*!*/
+
+/*.error-text {*/
+/*  color: #ff0000;*/
+/*  font-size: 1em;*/
+/*  font-weight: 600;*/
+/*  display: block;*/
+/*  text-align: center;*/
+/*  margin-top: 10px;*/
+/*}*/
+
+/*!*.button-for-form {*!*/
+/*!*  height: 40px;*!*/
+/*!*  border: none;*!*/
+/*!*  border-radius: 5px;*!*/
+/*!*  background-color: #3131ff;*!*/
+/*!*  color: #ffffff;*!*/
+/*!*  font-size: 1.1em;*!*/
+/*!*  font-weight: 700;*!*/
+/*!*  cursor: pointer;*!*/
+/*!*  transition: background-color 0.3s, color 0.3s;*!*/
+/*!*  margin-top: 10px;*!*/
+/*!*  width: 100%;*!*/
+/*!*}*!*/
+
+/*!*.button-for-form:hover {*!*/
+/*!*  background-color: #3131ff7b;*!*/
+/*!*  color: #685959;*!*/
+/*!*}*!*/
+
+/*!*.link-for-registration {*!*/
+/*!*  margin-top: 20px;*!*/
+/*!*}*!*/
+
+/*!*.button-for-registration {*!*/
+/*!*  height: 40px;*!*/
+/*!*  margin-top: 20px;*!*/
+/*!*  border: 2px solid #ffffff;*!*/
+/*!*  border-radius: 5px;*!*/
+/*!*  background-color: transparent;*!*/
+/*!*  color: #ffffff;*!*/
+/*!*  font-size: 1.1em;*!*/
+/*!*  font-weight: 700;*!*/
+/*!*  cursor: pointer;*!*/
+/*!*  transition: border-color 0.3s, color 0.3s;*!*/
+/*!*  width: 100%;*!*/
+/*!*}*!*/
+
+/*!*.button-for-registration:hover {*!*/
+/*!*  color: #3131ff;*!*/
+/*!*  border-color: #3131ff;*!*/
+/*!*}*!*/
+
+/*.default-input {*/
+/*  border-color: red;*/
+/*}*/
+
+/*.hidden {*/
+/*  visibility: hidden;*/
+/*}*/
+
+
 .background {
   background-image: linear-gradient(to bottom, #01014a, #000080);
   height: 100vh;
@@ -34,79 +153,25 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.form-item {
-  height: 40px;
-  border-radius: 5px;
-  border: 2px solid #3a3535;
-  background-color: #ffffff00;
-  color: #ffffff;
-  padding: 0 10px;
-  transition: border-color 0.3s linear;
-}
-
-.form-item:focus {
-  outline: none;
-  border-color: #3131ff;
-}
+/*.form-item {*/
+/*  width: 100%;*/
+/*}*/
 
 .error-text {
-  color: #ff0000;
-  font-size: 1em;
-  font-weight: 600;
-  display: block;
-  text-align: center;
-  margin-top: 10px;
+  color: red;
+  margin-bottom: 16px;
 }
 
 .button-for-form {
   height: 40px;
-  border: none;
-  border-radius: 5px;
-  background-color: #3131ff;
-  color: #ffffff;
-  font-size: 1.1em;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  margin-top: 10px;
-  width: 100%;
 }
 
-.button-for-form:hover {
-  background-color: #3131ff7b;
-  color: #685959;
-}
-
-/*.link-for-registration {*/
-/*  margin-top: 20px;*/
-/*}*/
-
-.button-for-registration {
-  height: 40px;
+.log-in {
   margin-top: 20px;
-  border: 2px solid #ffffff;
-  border-radius: 5px;
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 1.1em;
-  font-weight: 700;
-  cursor: pointer;
-  transition: border-color 0.3s, color 0.3s;
-  width: 100%;
 }
 
-.button-for-registration:hover {
-  color: #3131ff;
-  border-color: #3131ff;
-}
-
-.default-input {
-  border-color: red;
-}
-
-.hidden {
-  visibility: hidden;
-}

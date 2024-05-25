@@ -1,18 +1,28 @@
 import { Component } from '@angular/core';
-import {AsyncPipe} from "@angular/common";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 import {RegisterStore} from "./register.store";
 import {provideComponentStore} from "@ngrx/component-store";
+import {MatFormField, MatLabel} from "@angular/material/form-field";
+import {MatButtonToggle} from "@angular/material/button-toggle";
+import {MatInput} from "@angular/material/input";
+import {MatButton} from "@angular/material/button";
 
 @Component({
   selector: 'app-register',
   standalone: true,
-    imports: [
-        AsyncPipe,
-        ReactiveFormsModule,
-        RouterLink
-    ],
+  imports: [
+    AsyncPipe,
+    ReactiveFormsModule,
+    RouterLink,
+    MatFormField,
+    MatButtonToggle,
+    MatInput,
+    MatButton,
+    NgIf,
+    MatLabel
+  ],
   providers: [provideComponentStore(RegisterStore)],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'

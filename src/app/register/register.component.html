@@ -9,25 +9,33 @@
     </div>
 
     <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <input [class.default-input]="isError$ | async" class="form-item form-field"
-             formControlName="firstName" type="text"
-             placeholder="Имя"
-             required>
-      <input [class.default-input]="isError$ | async" class="form-item form-field"
-             formControlName="lastName" type="text"
-             placeholder="Фамилия"
-             required>
-      <input [class.default-input]="isError$ | async" class="form-item form-field email"
-             name="email" formControlName="email" type="email"
-             placeholder="Введите адрес электронной почты"
-             required>
-      <input [class.default-input]="isError$ | async" class="form-item form-field"
-             name="password" formControlName="password" type="password"
-             placeholder="Введите пароль"
-             required>
-      <div [class.hidden]="!(isError$ | async)" class="error-text">Неправильная почта или пароль</div>
-      <button class="form-item button-for-form" type="submit" [disabled]="!registerForm.valid || (isLoading$ | async)">Продолжить</button>
+      <mat-form-field appearance="fill" class="form-item">
+        <mat-label>Имя</mat-label>
+        <input matInput formControlName="firstName" type="text" placeholder="Имя" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-item">
+        <mat-label>Фамилия</mat-label>
+        <input matInput formControlName="lastName" type="text" placeholder="Фамилия" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-item">
+        <mat-label>Введите адрес электронной почты</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Введите адрес электронной почты" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-item">
+        <mat-label>Введите пароль</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="Введите пароль" required>
+      </mat-form-field>
+<!--      <div *ngIf="isError$ | async" class="error-text">Неправильная почта или пароль</div>-->
+      <button mat-raised-button type="submit">
+        Продолжить
+      </button>
+      <mat-button-toggle routerLink="/login" color="primary" class="log-in">
+        Войти
+      </mat-button-toggle>
     </form>
-    <button class="button-for-registration" type="button" routerLink="/login">Войти</button>
+
   </div>
 </div>

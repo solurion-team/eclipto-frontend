@@ -1,4 +1,6 @@
-<div (click)="onCardClick()" class="card">
-  <div class="square" [style.background-color]=state.iconColor></div>
-  <div class="text-card">{{state.name}}</div>
-</div>
+<mat-button-toggle color="primary" (click)="onCardClick()" class="card">
+  <div class="in-toggle">
+    <mat-icon class="square" [style.color]=state.iconColor>square</mat-icon>
+    <span class="text-card">{{state.name}}</span>
+  </div>
+</mat-button-toggle>

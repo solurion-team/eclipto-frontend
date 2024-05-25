@@ -1,0 +1,9 @@
+# don't touch it if you don't know what you're doing
+pom.xml
+build.gradle
+build.gradle.kts
+**/ApiUtil.java
+**/resources/*.yaml
+**/resources/*.configuration
+*.md
+**/api/**

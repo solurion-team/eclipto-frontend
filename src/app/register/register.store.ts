@@ -5,7 +5,8 @@ import {exhaustMap, finalize, Observable, tap} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {RegisterService} from "./register.service";
-import {AuthService} from "../data/auth.service";
+import {AuthService} from "../client/api/auth.service";
+import {CredentialsService} from "../data/credentials.service";
 
 export interface RegisterState {
   firstName: string;
@@ -37,7 +38,7 @@ const initialState: RegisterState = {
 @Injectable()
 export class RegisterStore extends ComponentStore<RegisterState>{
   constructor(
-    private readonly authService: AuthService,
+    private readonly authService: AuthService, private readonly credentialsService: CredentialsService
   ) {
     super(initialState);
   }
@@ -66,6 +67,7 @@ export class RegisterStore extends ComponentStore<RegisterState>{
         finalize(() => this.patchState({isLoading: false})),
         tapResponse(
           (response) => {
+            this.credentialsService.saveCredentials(response)
             this.patchState({isRegisterCompleted: true})
           },
           (error: HttpErrorResponse) => {

@@ -1,0 +1,12 @@
+<mat-dialog-content>
+  <h2 mat-dialog-title>Create new task status</h2>
+  <form [formGroup]="taskStatusForm" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="name" placeholder="Название статуса">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!taskStatusForm.valid" (click)="submitForm()">Create</button>
+</mat-dialog-actions>

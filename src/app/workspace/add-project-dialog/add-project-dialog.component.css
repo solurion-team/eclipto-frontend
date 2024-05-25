@@ -64,31 +64,29 @@
 
 
 
-/* Стили для кнопок */
+
 .button-container {
   margin-top: 20px;
 }
 
-/* Стили для формы */
+
 form {
   margin-top: 20px;
 }
 
-/* Стили для поля ввода */
+
 mat-form-field {
   width: 100%;
 }
 
-/* Стили для кнопки "Toggle Form" */
+
 button {
   margin-right: 10px;
 }
 
 
 mat-dialog-content {
-
-  color: red;
-  background-color: #1bdcdc;
+  background-color: white;
 }
 
 

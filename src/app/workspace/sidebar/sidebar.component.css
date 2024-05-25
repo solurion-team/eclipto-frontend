@@ -1,6 +1,8 @@
+
 .sidebar {
   position: fixed;
   left: 0;
+  /*padding: 0 10px;*/
   width: 200px;
   height: 100vh;
   background-color: white;
@@ -26,49 +28,32 @@
 }
 
 .icon {
-  user-select: none;
   position: absolute;
-  padding: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   left: calc(100% - 20px);
-  background-color: white;
-  border-radius: 50%;
-  box-shadow: 0 0 15px 3px rgba(0,0,0,0.2);
-  transition: color 0.3s;
 }
 
 .icon-collapse {
   transform: rotate(180deg);
 }
 
-.icon:hover {
-  color: #3131ff;
-}
+/*.icon:hover {*/
+/*  color: #3131ff;*/
+/*}*/
 
 .plus {
-  user-select: none;
   position: absolute;
   left: calc(70% - 15px);
-  background-color: lightgray;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.plus:hover {
-  background-color: #3131ff7b;
-  color: #685959;
 }
 
 .card-container {
   display: flex;
   flex-direction: column;
+  gap: 15px;
   height: 80vh;
   overflow-x: auto;
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  border: none;
 }
+
+

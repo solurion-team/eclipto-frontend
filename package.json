@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate-client-user": "openapi-generator-cli generate -i ..\\eclipto-backend\\microservices\\user\\openapi.yaml -g typescript-angular -o ./src/app/client/",
+    "generate-client-task": "openapi-generator-cli generate -i ..\\eclipto-backend\\microservices\\task\\openapi.yaml -g typescript-angular -o ./src/app/client/",
+    "generate-client-project": "openapi-generator-cli generate -i ..\\eclipto-backend\\microservices\\project\\openapi.yaml -g typescript-angular -o ./src/app/client/",
+    "generate-client-workspace": "openapi-generator-cli generate -i ..\\eclipto-backend\\microservices\\workspace\\openapi.yaml -g typescript-angular -o ./src/app/client/",
+    "generate-client-gateway": "openapi-generator-cli generate -i http://localhost:8000/openapi.json -g typescript-angular -o ./src/app/client/"
   },
   "private": true,
   "dependencies": {
@@ -21,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@angular/router": "^17.3.0",
     "@ngrx/component-store": "^17.2.0",
+    "jwt-decode": "^4.0.0",
     "ngx-cookie-service": "^17.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

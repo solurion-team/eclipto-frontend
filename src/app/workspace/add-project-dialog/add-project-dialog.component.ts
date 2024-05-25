@@ -67,7 +67,14 @@
 
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle
+} from '@angular/material/dialog';
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
@@ -85,7 +92,8 @@ import {CommonModule} from "@angular/common";
     MatInput,
     MatButton,
     MatDialogActions,
-    MatDialogClose
+    MatDialogClose,
+    MatDialogTitle
   ],
   styleUrls: ['./add-project-dialog.component.css']
 })

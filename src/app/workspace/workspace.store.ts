@@ -1,11 +1,12 @@
 import {Injectable, OnDestroy} from "@angular/core";
 import {ComponentStore} from "@ngrx/component-store";
 import {SidebarState} from "./sidebar/sidebar.component";
-import {ProjectClient} from "../data/project.client";
 import {exhaustMap, finalize, Observable, Subject, tap, withLatestFrom} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ProjectCardState} from "./sidebar/project-card/project-card.component";
+import {ProjectService} from "../client/api/project.service";
+import {CredentialsService} from "../data/credentials.service";
 
 export interface WorkspaceState {
   readonly id?: number,
@@ -19,7 +20,7 @@ const initialState: WorkspaceState = {
 
 @Injectable()
 export class WorkspaceStore extends ComponentStore<WorkspaceState> implements OnDestroy {
-  constructor(private readonly projectClient: ProjectClient) {
+  constructor(private readonly projectService: ProjectService, private readonly credentialsService: CredentialsService) {
     super(initialState);
   }
   private readonly _openAddProjectDialogEvent$: Subject<void> = new Subject<void>();
@@ -50,10 +51,9 @@ export class WorkspaceStore extends ComponentStore<WorkspaceState> implements On
 
   readonly loadWorkspace = this.effect((workspaceId$: Observable<number>) => {
     return workspaceId$.pipe(
-      exhaustMap((workspaceId) => this.projectClient.getProjects(workspaceId).pipe(
+      exhaustMap((workspaceId) => this.projectService.getProjects(workspaceId).pipe(
         tapResponse(
           (projectInfoDtos) => {
-            console.log(projectInfoDtos)
             const projectCardStates = projectInfoDtos.map<ProjectCardState>((projectInfo) => {
               return {...projectInfo, iconColor: "blue", isSelected: false}
             })
@@ -73,7 +73,13 @@ export class WorkspaceStore extends ComponentStore<WorkspaceState> implements On
     return projectData$.pipe(
       withLatestFrom(this.select(state => state.id!)),
       exhaustMap(([projectData, workspaceId]) =>
-        this.projectClient.createProject({...projectData, lead_id:1, workspace_id: workspaceId}).pipe(
+        this.projectService.postProject({
+          name: projectData.name,
+          description: projectData.description,
+          lead_id: this.credentialsService.userId,
+          workspace_id: workspaceId,
+          tint: "#035efc"
+        }).pipe(
           tapResponse(
             (projectInfoDto) => {
               this.patchState((state) => ({

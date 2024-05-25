@@ -1,47 +1,63 @@
+/*.card {*/
+/*  !*border-radius: 5px;*!*/
+/*  min-height: 30px;*/
+/*  min-width: 200px;*/
+/*  width: fit-content;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  justify-content: center;*/
+/*  !*text-align: center;*!*/
+/*  !*margin-bottom: 10px;*!*/
+/*  !*border: 2px solid #ffffff;*!*/
+/*  !*color: rgba(0, 0, 0, 0.712);*!*/
+/*  !*transition: background-color 0.3s, color 0.3s;*!*/
+/*  !*box-sizing: border-box;*!*/
+/*}*/
+
+/*.card:hover {*/
+/*  background-color: #1146f556;*/
+/*  color: black;*/
+/*}*/
+
+/*.text-card {*/
+/*  margin-left: 50px;*/
+/*  width: calc(100% - 35px);*/
+/*}*/
+
+/*.input-card {*/
+/*  margin-left: 50px;*/
+/*  width: 80%;*/
+/*  height: 25px;*/
+/*  padding-left: 5px;*/
+/*}*/
+
+/*.square {*/
+/*  !*position: absolute;*!*/
+/*  !*left: 10px;*!*/
+/*  !*width: 25px;*!*/
+/*  !*height: 25px;*!*/
+/*  !*border-radius: 5px;*!*/
+/*}*/
+
+/*.current-card {*/
+/*  background-color: #1146f556;*/
+/*  color: black;*/
+/*}*/
+
 .card {
-  position: relative;
-  background-color: transparent;
-  border-radius: 5px;
-  min-height: 40px;
+  display: flex;
+  width: fit-content;
+}
+
+.in-toggle {
+  display: flex;
   min-width: 200px;
   width: fit-content;
-  margin-bottom: 10px;
-  border: 2px solid #ffffff;
-  color: rgba(0, 0, 0, 0.712);
-  display: flex;
+  justify-content: flex-start;
   align-items: center;
-  transition: background-color 0.3s, color 0.3s;
-  box-sizing: border-box;
+  flex-direction: row;
+  gap: 15px;
 }
 
-.card:hover {
-  background-color: #1146f556;
-  color: black;
-}
-
-.text-card {
-  margin-left: 50px;
-  width: calc(100% - 35px);
-}
-
-.input-card {
-  margin-left: 50px;
-  width: 80%;
-  height: 25px;
-  padding-left: 5px;
-}
-
-.square {
-  position: absolute;
-  left: 10px;
-  width: 25px;
-  height: 25px;
-  border-radius: 5px;
-}
-
-.current-card {
-  background-color: #1146f556;
-  color: black;
-}
 
 

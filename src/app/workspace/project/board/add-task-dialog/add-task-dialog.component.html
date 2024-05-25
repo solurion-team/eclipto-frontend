@@ -1,0 +1,30 @@
+<mat-dialog-content>
+  <h2 mat-dialog-title>Create new task</h2>
+
+  <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="title" placeholder="Название проекта">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <textarea matInput formControlName="description" placeholder="Описание проекта"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Выберите приоритет</mat-label>
+      <mat-select formControlName="priority" value="medium">
+        <mat-option value="high">Высокий</mat-option>
+        <mat-option value="medium">Средний</mat-option>
+        <mat-option value="low">Низкий</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <input matInput type="datetime-local" placeholder="Введите дату">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!taskForm.valid" (click)="submitForm()">Create</button>
+</mat-dialog-actions>

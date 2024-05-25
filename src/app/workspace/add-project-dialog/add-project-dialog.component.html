@@ -9,7 +9,9 @@
 <!--  </form>-->
 <!--</dialog>-->
 
+
 <mat-dialog-content>
+  <h2 mat-dialog-title>Create new project</h2>
   <form [formGroup]="projectForm" (ngSubmit)="submitForm()">
     <mat-form-field appearance="fill">
       <input matInput formControlName="name" placeholder="Название проекта">

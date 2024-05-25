@@ -1,0 +1,23 @@
+.button-container {
+  margin-top: 20px;
+}
+
+
+form {
+  margin-top: 20px;
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+
+button {
+  margin-right: 10px;
+}
+
+
+mat-dialog-content {
+  background-color: white;
+}

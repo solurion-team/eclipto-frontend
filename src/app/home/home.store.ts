@@ -36,6 +36,7 @@ const initialState: HomeState = {
 
 @Injectable()
 export class HomeStore extends ComponentStore<HomeState> implements OnDestroy {
+  private http: any;
   constructor(
     private readonly workspaceService: WorkspaceService,
     private readonly credentialsService: CredentialsService
@@ -117,5 +118,12 @@ export class HomeStore extends ComponentStore<HomeState> implements OnDestroy {
     super.ngOnDestroy();
 
     this._navigateToWorkspaceEvent$.complete()
+  }
+  deleteWorkspace(id: number): void {
+    this.workspaceService.deleteWorkspace(id).subscribe(() => {
+      this.patchState(state => ({
+        workspaceCarsStates: state.workspaceCarsStates.filter(workspace => workspace.id !== id)
+      }));
+    });
   }
 }

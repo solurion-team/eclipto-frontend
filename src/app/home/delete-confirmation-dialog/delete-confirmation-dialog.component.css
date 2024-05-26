@@ -1,1 +1,32 @@
+.dialog-title {
+  font-size: 1.5em;
+  height: 100px;
+  text-align: center;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+mat-dialog-content{
+  font-size: 1.1em;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.dialog-description{
+  text-align: center;
+}
+
+.mat-dialog-actions button {
+  margin: 8px; /* Добавляем отступы для всех кнопок */
+}
+
+
+button[color="warn"] {
+  background-color: #1818c7;
+  color: #fff;
+}
+
+button[color="warn"]:hover {
+  background-color: #12238c;
+}
 

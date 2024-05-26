@@ -10,7 +10,7 @@ import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from "@angul
 import { MatIcon } from "@angular/material/icon";
 import { MatButtonToggle } from "@angular/material/button-toggle";
 import { MatCard, MatCardContent } from "@angular/material/card";
-import { AddTaskDialogComponent } from "./add-task-dialog/add-task-dialog.component";
+import {AddTaskDialogComponent, AddTaskDialogResult, TaskData} from "./add-task-dialog/add-task-dialog.component";
 import { AddTaskStatusDialogComponent } from "./add-task-status-dialog/add-task-status-dialog.component";
 import { ProjectCardComponent } from "../../sidebar/project-card/project-card.component";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
@@ -75,16 +75,25 @@ export class BoardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.boardStore.taskDataLoadedEvent$.subscribe({
+      next: (data) => this.openAddTaskDialog(data.taskStatusId, data)
+    })
     this.boardStore.loadBoard()
   }
 
-  openAddTaskDialog(taskStatusId: number) {
+  openAddTaskDialog(taskStatusId: number, taskData?: TaskData) {
     this.addTaskDialogRef = this.dialog.open(AddTaskDialogComponent, {
       height: '600px',
       width: '1000px',
-      data: { taskStatusId: taskStatusId }
+      data: { taskStatusId: taskStatusId, taskData: taskData }
     });
-    this.addTaskDialogRef.afterClosed().subscribe(result => result && this.boardStore.addTask(result))
+    this.addTaskDialogRef.afterClosed().subscribe((result: AddTaskDialogResult) => {
+      if (result && result.update) {
+        this.boardStore.updateTask(result.taskData)
+      } else if (result) {
+        this.boardStore.addTask(result.taskData)
+      }
+    })
   }
 
   openAddTaskStatusDialog() {
@@ -93,18 +102,6 @@ export class BoardComponent implements OnInit {
       width: '600px',
     });
     this.addTaskStatusDialogRef.afterClosed().subscribe(result => result && this.boardStore.addTaskStatus(result))
-  }
-
-  openEditTaskDialog(taskId: number) {
-    this.boardStore.loadTaskById(taskId).subscribe((task: any) => {
-      if (task) {
-        this.dialog.open(AddTaskDialogComponent, {
-          height: '600px',
-          width: '1000px',
-          data: { task }
-        });
-      }
-    });
   }
 
   drop(event: CdkDragDrop<any[]>, taskStatus: any) {
@@ -120,16 +117,16 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  toggleTaskCompletion(event: MouseEvent) {
-    const checkbox = event.target as HTMLInputElement;
-    const taskCard = checkbox.closest('.task-card');
-    if (taskCard) {
-      taskCard.classList.toggle('completed', checkbox.checked);
-    }
-  }
-
   sortPredicate(index: number, _: CdkDrag<TaskCard>, drop: CdkDropList<TaskCard[]>): boolean {
     return index === drop.data.length;
+  }
+
+  editTask(id: number) {
+    this.boardStore.loadTaskData(id)
+  }
+
+  deleteTask(taskStatusId: number, taskId: number) {
+    this.boardStore.deleteTask({taskStatusId, taskId})
   }
 }
 

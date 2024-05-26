@@ -20,11 +20,11 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Введите дату</mat-label>
-      <input matInput formControlName="date" readonly (focus)="openCalendar()" [value]="selectedDate | date:'yyyy-MM-dd'">
+      <input matInput formControlName="date" readonly (focus)="openCalendar()">
     </mat-form-field>
 
     <mat-card *ngIf="calendarVisible" class="demo-inline-calendar-card">
-      <mat-calendar [(selected)]="selectedDate" (selectedChange)="saveDate()"></mat-calendar>
+      <mat-calendar [(selected)]="taskForm.value.date" (selectedChange)="saveDate($event)"></mat-calendar>
     </mat-card>
   </form>
 </mat-dialog-content>

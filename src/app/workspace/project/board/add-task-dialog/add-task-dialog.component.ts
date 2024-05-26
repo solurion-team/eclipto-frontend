@@ -15,24 +15,20 @@ import { MatCard } from "@angular/material/card";
 import { DatePipe, NgIf } from "@angular/common";
 import { provideNativeDateAdapter } from "@angular/material/core";
 
-export interface AddTaskData {
+export interface TaskData {
+  id?: number;
   title: string;
-  description: string;
+  description: string | null | undefined ;
+  isCompleted: boolean;
   priority: Priority;
-  assignedUserId?: number;
+  assignedUserId?: number | null | undefined ;
   taskStatusId: number;
-  date: Date;
+  date?: Date;
 }
 
-export interface EditTaskData {
-  task: {
-    id: number;
-    title: string;
-    description: string;
-    priority: Priority;
-    date: Date;
-    taskStatusId: number;
-  }
+export interface AddTaskDialogResult {
+  update: boolean,
+  taskData: TaskData
 }
 
 @Component({
@@ -61,57 +57,51 @@ export interface EditTaskData {
   styleUrls: ['./add-task-dialog.component.css']
 })
 export class AddTaskDialogComponent implements OnInit {
-  selectedDate: Date | null = null;
   calendarVisible: boolean = false;
 
   taskForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(1)]),
     description: new FormControl('', []),
     priority: new FormControl<Priority>('medium', [Validators.required]),
-    date: new FormControl<Date | null>(null, [Validators.required])
+    date: new FormControl<Date | null>(null)
   });
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { taskStatusId?: number, task?: { id: number, title: string, description: string, priority: Priority, date: Date, taskStatusId: number } },
+    @Inject(MAT_DIALOG_DATA) public data: { taskStatusId: number, taskData?: TaskData },
     private readonly dialogRef: MatDialogRef<AddTaskDialogComponent>
   ) { }
 
   ngOnInit(): void {
-    if (this.data.task) {
+    if (this.data.taskData) {
       this.taskForm.patchValue({
-        title: this.data.task.title,
-        description: this.data.task.description,
-        priority: this.data.task.priority,
-        date: this.data.task.date
+        title: this.data.taskData.title,
+        description: this.data.taskData.description,
+        priority: this.data.taskData.priority,
+        date: this.data.taskData.date
       });
     }
   }
 
   submitForm() {
-    if (this.data.task) {
-      // Editing existing task
-      const editTaskData: EditTaskData = {
-        task: {
-          id: this.data.task.id,
-          title: this.taskForm.value.title!,
-          description: this.taskForm.value.description!,
-          priority: this.taskForm.value.priority!,
-          date: this.taskForm.value.date!,
-          taskStatusId: this.data.task.taskStatusId
-        }
-      };
-      this.dialogRef.close(editTaskData);
-    } else {
-      // Creating new task
-      const addTaskData: AddTaskData = {
-        title: this.taskForm.value.title!,
-        description: this.taskForm.value.description!,
-        priority: this.taskForm.value.priority!,
-        date: this.taskForm.value.date!,
-        taskStatusId: this.data.taskStatusId!
-      };
-      this.dialogRef.close(addTaskData);
+    const addTaskData: TaskData = {
+      title: this.taskForm.value.title!,
+      description: this.taskForm.value.description!,
+      isCompleted: false,
+      priority: this.taskForm.value.priority!,
+      date: this.taskForm.value.date!,
+      taskStatusId: this.data.taskStatusId
+    };
+    console.log(addTaskData)
+    if (this.data.taskData) {
+      addTaskData.id = this.data.taskData.id!;
+      if (addTaskData === this.data.taskData) {
+        this.dialogRef.close();
+        return
+      }
+      this.dialogRef.close(<AddTaskDialogResult>{update: true, taskData: addTaskData});
+      return
     }
+    this.dialogRef.close(<AddTaskDialogResult>{update: false, taskData: addTaskData});
   }
 
   closeDialog() {
@@ -122,9 +112,9 @@ export class AddTaskDialogComponent implements OnInit {
     this.calendarVisible = true;
   }
 
-  saveDate() {
-    if (this.selectedDate) {
-      this.taskForm.patchValue({ date: this.selectedDate });
+  saveDate(date: Date | undefined | null ) {
+    if (date) {
+      this.taskForm.patchValue({ date: date });
       this.calendarVisible = false;
     }
   }

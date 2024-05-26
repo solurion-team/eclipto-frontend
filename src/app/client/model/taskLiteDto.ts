@@ -22,6 +22,10 @@ export interface TaskLiteDto {
      */
     title: string;
     /**
+     * Position index of the task
+     */
+    index: number;
+    /**
      * Priority of the task
      */
     priority: Priority;
@@ -29,6 +33,10 @@ export interface TaskLiteDto {
      * Id of the assigned
      */
     assigned_user_id: number;
+    /**
+     * Completed task
+     */
+    is_completed: boolean;
 }
 export namespace TaskLiteDto {
 }

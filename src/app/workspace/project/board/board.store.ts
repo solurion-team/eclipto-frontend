@@ -98,6 +98,7 @@ export class BoardStore extends ComponentStore<BoardState> {
       withLatestFrom(this.projectStore.id$, this.state$),
       exhaustMap(([taskData, projectId, state]) => this.taskService.postTask({
         title: taskData.title,
+        index: 1,
         status_id: taskData.taskStatusId,
         priority: taskData.priority,
         reporter_user_id: this.credentialsService.userId,

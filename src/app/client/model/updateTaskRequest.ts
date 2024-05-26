@@ -15,6 +15,10 @@ import { Priority } from './priority';
 export interface UpdateTaskRequest { 
     title?: string | null;
     description?: string | null;
+    /**
+     * Position index of the task
+     */
+    index: number;
     status_id?: number | null;
     priority?: Priority | null;
     /**
@@ -23,6 +27,7 @@ export interface UpdateTaskRequest {
     due_date: string;
     assigned_user_id?: number | null;
     reporter_user_id?: number | null;
+    is_completed?: boolean | null;
 }
 export namespace UpdateTaskRequest {
 }

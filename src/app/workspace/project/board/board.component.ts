@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { provideComponentStore } from "@ngrx/component-store";
 import { ProjectStore } from "../project.store";
-import { BoardStore } from "./board.store";
+import {BoardStore, TaskCard} from "./board.store";
 import { WorkspaceStore } from "../../workspace.store";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AddProjectDialogComponent } from "../../add-project-dialog/add-project-dialog.component";
@@ -20,7 +20,14 @@ import { MatInput } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
-import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {
+  DragDropModule,
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  CdkDrag,
+  CdkDropList
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -100,14 +107,6 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  trackByTaskStatusId(index: number, taskStatus: any): number {
-    return taskStatus.id;
-  }
-
-  trackByTaskId(index: number, task: any): number {
-    return task.id;
-  }
-
   drop(event: CdkDragDrop<any[]>, taskStatus: any) {
     if (event.previousContainer === event.container) {
       moveItemInArray(taskStatus.tasks, event.previousIndex, event.currentIndex);
@@ -119,7 +118,6 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
-    // Optionally, you can update the task status in the backend here.
   }
 
   toggleTaskCompletion(event: MouseEvent) {
@@ -130,6 +128,9 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  sortPredicate(index: number, _: CdkDrag<TaskCard>, drop: CdkDropList<TaskCard[]>): boolean {
+    return index === drop.data.length;
+  }
 }
 
 

@@ -30,6 +30,10 @@ export interface CreateTaskRequest {
      */
     title: string;
     description?: string | null;
+    /**
+     * Position index of the task
+     */
+    index: number;
     priority?: Priority | null;
     due_date?: string | null;
     assigned_user_id?: number | null;

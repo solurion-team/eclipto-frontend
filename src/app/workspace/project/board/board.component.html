@@ -2,7 +2,7 @@
   <div class="board-content-wrapper">
     <div class="board-content" cdkDropListGroup>
       <div *ngFor="let taskStatus of taskStatuses$ | async; trackBy: trackByTaskStatusId" class="task-column" cdkDropList [cdkDropListData]="taskStatus.tasks" (cdkDropListDropped)="drop($event, taskStatus)">
-        <span class="title-for-column">{{taskStatus.name}}</span>
+        <span class="title-for-column">{{ taskStatus.name }}</span>
         <button mat-raised-button class="create-task-card" (click)="openAddTaskDialog(taskStatus.id)">
           <mat-icon>add</mat-icon>
           <span class="text-create">Создать</span>
@@ -10,12 +10,23 @@
         <div class="task-column-content">
           <div *ngFor="let task of taskStatus.tasks; trackBy: trackByTaskId" class="task-card" cdkDrag>
             <div class="task-card-header">
-              <span class="task-title">{{task.title}}</span>
+              <span class="task-title">{{ task.title }}</span>
               <button mat-icon-button [matMenuTriggerFor]="menu" class="task-card-menu">
                 <mat-icon>more_horiz</mat-icon>
               </button>
             </div>
-            <span class="task-card-priority">{{task.priority}}</span>
+            <span class="task-card-priority">
+              <mat-icon class="task-card-priority" style="color:red" *ngIf="task.priority === 'high'">dehaze</mat-icon>
+              <mat-icon class="task-card-priority" style="color:orange" *ngIf="task.priority === 'medium'">drag_handle</mat-icon>
+              <mat-icon class="task-card-priority" style="color: limegreen" *ngIf="task.priority === 'low'">horizontal_rule</mat-icon>
+            </span>
+
+<!--            <span class="task-card-priority">-->
+<!--&lt;!&ndash;              {{task.priority}}&ndash;&gt;-->
+<!--&lt;!&ndash;              <mat-icon>add</mat-icon>&ndash;&gt;-->
+<!--              <mat-icon *ngIf="task.priority === 'medium'">add</mat-icon>-->
+<!--            </span>-->
+
             <div class="task-card-checkbox">
               <input type="checkbox" class="task-checkbox" (click)="toggleTaskCompletion($event)">
             </div>
@@ -38,6 +49,7 @@
     </div>
   </div>
 </div>
+
 
 
 

@@ -66,6 +66,7 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  overflow: hidden;
 }
 
 .task-card:hover {
@@ -86,8 +87,8 @@
 
 .task-card-priority {
   align-self: flex-end;
-  font-size: 0.9em;
-  color: #666;
+  color: dodgerblue;
+  margin-right: 5px;
 }
 
 .task-card-menu {

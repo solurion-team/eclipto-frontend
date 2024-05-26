@@ -13,7 +13,7 @@ import { MatCard, MatCardContent } from "@angular/material/card";
 import { AddTaskDialogComponent } from "./add-task-dialog/add-task-dialog.component";
 import { AddTaskStatusDialogComponent } from "./add-task-status-dialog/add-task-status-dialog.component";
 import { ProjectCardComponent } from "../../sidebar/project-card/project-card.component";
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import { MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from "@angular/material/datepicker";
 import { MatFormField, MatHint, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
@@ -48,7 +48,8 @@ import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from 
     MatMenu,
     MatMenuItem,
     DragDropModule,
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   providers: [provideComponentStore(BoardStore), provideNativeDateAdapter()],
   templateUrl: './board.component.html',

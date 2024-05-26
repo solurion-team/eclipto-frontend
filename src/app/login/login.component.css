@@ -34,79 +34,24 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.form-item {
-  height: 40px;
-  border-radius: 5px;
-  border: 2px solid #3a3535;
-  background-color: #ffffff00;
-  color: #ffffff;
-  padding: 0 10px;
-  transition: border-color 0.3s linear;
-}
-
-.form-item:focus {
-  outline: none;
-  border-color: #3131ff;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .error-text {
-  color: #ff0000;
-  font-size: 1em;
-  font-weight: 600;
-  display: block;
-  text-align: center;
-  margin-top: 10px;
+  color: red;
+  margin-bottom: 16px;
 }
 
-.button-for-form {
-  height: 40px;
-  border: none;
-  border-radius: 5px;
-  background-color: #3131ff;
-  color: #ffffff;
-  font-size: 1.1em;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  margin-top: 10px;
-  width: 100%;
-}
-
-.button-for-form:hover {
-  background-color: #3131ff7b;
-  color: #685959;
-}
-
-/*.link-for-registration {*/
-/*  margin-top: 20px;*/
-/*}*/
-
-.button-for-registration {
-  height: 40px;
+.button {
   margin-top: 20px;
-  border: 2px solid #ffffff;
-  border-radius: 5px;
-  background-color: transparent;
-  color: #ffffff;
-  font-size: 1.1em;
-  font-weight: 700;
-  cursor: pointer;
-  transition: border-color 0.3s, color 0.3s;
-  width: 100%;
+  &.mat-raised-button[disabled] {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: rgba(255, 255, 255, 0.3);
+  }
 }
 
-.button-for-registration:hover {
-  color: #3131ff;
-  border-color: #3131ff;
-}
-
-.default-input {
-  border-color: red;
-}
-
-.hidden {
-  visibility: hidden;
+.log-in {
+  margin-top: 20px;
 }

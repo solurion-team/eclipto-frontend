@@ -1,6 +1,5 @@
+<h2 mat-dialog-title>Create new task</h2>
 <mat-dialog-content>
-  <h2 mat-dialog-title>Create new task</h2>
-
   <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
     <mat-form-field appearance="fill">
       <input matInput formControlName="title" placeholder="Название проекта">
@@ -34,5 +33,3 @@
   <button mat-button (click)="closeDialog()">Close</button>
   <button mat-raised-button color="primary" type="submit" [disabled]="!taskForm.valid" (click)="submitForm()">Create</button>
 </mat-dialog-actions>
-
-

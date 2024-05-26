@@ -1,63 +1,82 @@
 .background-for-board {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   background-color: #01014a;
   color: black;
+  overflow-y: auto; /* Вертикальный скролл для всего фона */
+}
+
+.board-content-wrapper {
+  display: flex;
+  flex: 1;
+  overflow-x: auto; /* Горизонтальный скролл для всех колонок */
+  align-items: flex-start; /* Выравнивание колонок по верху */
+}
+
+.board-content {
+  display: flex;
+  flex-direction: row;
   gap: 10px;
-  overflow-y: auto; /* Горизонтальный скролл */
+  width: max-content; /* Ширина зависит от содержимого */
 }
 
 .task-column {
   background-color: #f6f6f6;
   display: flex;
   flex-direction: column;
-  width: 250px; /* Фиксированная ширина */
-  min-height: 150px;
-  height: auto;
+  width: 260px;
   font-size: 1.1em;
   border-radius: 5px;
-  overflow: hidden;
-  flex-shrink: 0; /* Предотвращаем сжатие */
+  padding: 0 10px;
+  box-sizing: border-box;
+  align-items: center;
+  min-height: 500px;
+}
+
+.task-column-content {
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .title-for-column {
   font-size: 1.4em;
   font-weight: 600;
-  height: 30px;
-  width: 100%; /* Фиксированная ширина */
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 5px;
-  box-sizing: border-box; /* Учитываем padding и border в общей ширине */
-  background-color: yellow;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  padding: 5px 0;
+  box-sizing: border-box;
 }
 
 .task-card {
-  position: relative;
   font-size: 0.9em;
   background-color: #ffffff;
-  margin: 10px;
+  margin: 10px 0;
   border-radius: 3px;
-  padding: 5px;
+  padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  width: 230px; /* Фиксированная ширина для карточек */
-  min-width: 230px; /* Минимальная ширина для предотвращения сжатия */
-  flex-shrink: 0; /* Предотвращаем сжатие */
-}
-
-.task-card-content {
+  width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .task-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .task-title {
@@ -66,13 +85,49 @@
 }
 
 .task-card-priority {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  align-self: flex-end;
+  font-size: 0.9em;
+  color: #666;
 }
 
 .task-card-menu {
   position: relative;
+}
+
+.task-card-checkbox {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.task-checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 3px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.5;
+}
+
+.cdk-drag-animating {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.task-column.cdk-drop-list-dragging .task-card:not(.cdk-drag-placeholder) {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.task-card.cdk-drag-preview {
+  background-color: #e0e0e0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .create-task-card {
@@ -80,11 +135,13 @@
   flex-direction: row;
   align-items: center;
   font-weight: 500;
-  margin: 0 10px;
+  margin: 10px 0;
   border: none;
-  width: 230px; /* Фиксированная ширина для кнопок */
-  min-width: 230px; /* Минимальная ширина для предотвращения сжатия */
-  flex-shrink: 0; /* Предотвращаем сжатие */
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 50px;
+  min-height: 50px;
 }
 
 .text-create {
@@ -94,6 +151,11 @@
   align-self: center;
 }
 
+.add-task-column {
+  margin-top: 10px;
+}
 
-
-
+.task-card.completed {
+  background-color: #e0ffe0;
+  /*border: 1px solid #a0ffa0;*/
+}

@@ -51,7 +51,7 @@
   gap: 15px;
   height: 80vh;
   overflow-x: auto;
-  overflow-y: scroll;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   border: none;
 }

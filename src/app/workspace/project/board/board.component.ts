@@ -13,13 +13,14 @@ import { MatCard, MatCardContent } from "@angular/material/card";
 import { AddTaskDialogComponent } from "./add-task-dialog/add-task-dialog.component";
 import { AddTaskStatusDialogComponent } from "./add-task-status-dialog/add-task-status-dialog.component";
 import { ProjectCardComponent } from "../../sidebar/project-card/project-card.component";
-import { AsyncPipe } from "@angular/common";
+import {AsyncPipe, NgForOf} from "@angular/common";
 import { MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from "@angular/material/datepicker";
 import { MatFormField, MatHint, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
+import { DragDropModule, CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -45,7 +46,9 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
     ReactiveFormsModule,
     MatMenuTrigger,
     MatMenu,
-    MatMenuItem
+    MatMenuItem,
+    DragDropModule,
+    NgForOf
   ],
   providers: [provideComponentStore(BoardStore), provideNativeDateAdapter()],
   templateUrl: './board.component.html',
@@ -95,11 +98,38 @@ export class BoardComponent implements OnInit {
       }
     });
   }
+
+  trackByTaskStatusId(index: number, taskStatus: any): number {
+    return taskStatus.id;
+  }
+
+  trackByTaskId(index: number, task: any): number {
+    return task.id;
+  }
+
+  drop(event: CdkDragDrop<any[]>, taskStatus: any) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(taskStatus.tasks, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    }
+    // Optionally, you can update the task status in the backend here.
+  }
+
+  toggleTaskCompletion(event: MouseEvent) {
+    const checkbox = event.target as HTMLInputElement;
+    const taskCard = checkbox.closest('.task-card');
+    if (taskCard) {
+      taskCard.classList.toggle('completed', checkbox.checked);
+    }
+  }
+
 }
-
-
-
-
 
 
 

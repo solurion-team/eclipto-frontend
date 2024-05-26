@@ -10,6 +10,9 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AddProjectDialogComponent} from "../workspace/add-project-dialog/add-project-dialog.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AddWorkspaceDialogComponent} from "./add-workspace-dialog/add-workspace-dialog.component";
+import {MatIcon} from "@angular/material/icon";
+import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';  // <-- проверьте путь
+
 
 @Component({
   selector: "app-home",
@@ -20,7 +23,8 @@ import {AddWorkspaceDialogComponent} from "./add-workspace-dialog/add-workspace-
     FormsModule,
     AsyncPipe,
     MatProgressSpinner,
-    MatButton
+    MatButton,
+    MatIcon
   ],
   styleUrls: ["home.component.css"],
   providers: [provideComponentStore(HomeStore)],
@@ -59,6 +63,14 @@ export class HomeComponent implements OnInit {
   }
 
   deleteWorkspace(id: number): void {
+    const dialogRef = this.dialog.open(DeleteConfirmationDialogComponent, {
+      width: '250px',
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.homeStore.deleteWorkspace(id);
+      }
+    });
   }
 }

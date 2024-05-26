@@ -3,10 +3,13 @@
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
   } @else {
     <div class="search-container">
-      <h1 class="headingHome">Рабочие пространства</h1>
-      <button mat-flat-button color="primary" (click)="createWorkspace()">Создать рабочее пространство</button>
+      <div class="Workspace-container"><h1 class="Name-page">Рабочие пространства</h1>
+      <button mat-flat-button color="primary" (click)="createWorkspace()" class="Create-Workspace">Создать рабочее пространство</button>
       <!--    <input class="search" type="text" placeholder="Поиск по имени workspace" [(ngModel)]="searchQuery">-->
-      <table>
+      </div>
+      <div class="table-container">
+        <table class="Workspaces">
+
         <thead>
         <tr>
           <th class="first-name">Имя</th>
@@ -16,14 +19,16 @@
         </thead>
         <tbody>
           @for (workspaceCardState of workspaceCarsStates$ | async; track workspaceCardState.id) {
-            <tr (click)="openWorkspace(workspaceCardState.id)">
-              <td><span class="star">&#9734;</span>{{workspaceCardState.name}}</td>
-              <td>{{workspaceCardState.description}}</td>
-              <td>{{workspaceCardState.ownerName}}</td>
+            <tr>
+              <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.name}}</td>
+              <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.description}}</td>
+              <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.ownerName}}</td>
+              <mat-icon class="trashcan" (click)="deleteWorkspace(workspaceCardState.id); $event.stopPropagation()">delete</mat-icon>
             </tr>
           }
         </tbody>
       </table>
+      </div>
     </div>
   }
 </div>

@@ -28,9 +28,11 @@
         <mat-label>Введите пароль</mat-label>
         <input matInput formControlName="password" type="password" placeholder="Введите пароль" required>
       </mat-form-field>
-      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+
+      <button mat-raised-button color="primary" class="disable" type="submit" [class.disable]="registerForm.invalid">
         Продолжить
       </button>
+
       <mat-button-toggle routerLink="/login" color="basic" class="log-in">
         Войти
       </mat-button-toggle>

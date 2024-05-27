@@ -19,7 +19,7 @@
         <input matInput formControlName="password" type="password" placeholder="Введите пароль" required>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [disabled]="loginForm.invalid" type="submit">
+      <button mat-raised-button color="primary" [class.disable]="loginForm.invalid" type="submit">
         Продолжить
       </button>
 

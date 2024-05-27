@@ -5,7 +5,7 @@ import { tapResponse } from "@ngrx/operators";
 import { HttpErrorResponse } from "@angular/common/http";
 import { UserIconState } from "../../../common/user-icon/user-icon.component";
 import { ProjectStore } from "../project.store";
-import { TaskData } from "./add-task-dialog/add-task-dialog.component";
+import {TaskData, UpdateTaskData} from "./add-task-dialog/add-task-dialog.component";
 import { AddTaskStatusData } from "./add-task-status-dialog/add-task-status-dialog.component";
 import { TaskService } from "../../../client/api/task.service";
 import { CredentialsService } from "../../../data/credentials.service";
@@ -150,9 +150,17 @@ export class BoardStore extends ComponentStore<BoardState> implements OnDestroy 
     )
   })
 
-  readonly updateTask = this.effect((taskData$: Observable<TaskData>) => {
+  readonly updateTask = this.effect((taskData$: Observable<UpdateTaskData>) => {
     return taskData$.pipe(
-      exhaustMap((taskData) => this.taskService.updateTask(taskData.id!, taskData).pipe(
+      exhaustMap((taskData) => this.taskService.updateTask(taskData.id!, {
+        title: taskData.title,
+        description: taskData.description,
+        status_id: taskData.taskStatusId,
+        priority: taskData.priority,
+        due_date: taskData.date ? taskData.date.toISOString() : null,
+        assigned_user_id: taskData.assignedUserId,
+        is_completed: taskData.isCompleted
+      }).pipe(
         tapResponse(
           (taskInfoDto) => {
             this.patchState((state) =>

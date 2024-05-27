@@ -27,8 +27,9 @@
           <mat-option value="low">Низкий</mat-option>
         </mat-select>
       </mat-form-field>
-
-      <mat-checkbox  class="field-from-left" formControlName="isCompleted">Задача завершена</mat-checkbox>
+      @if (data.taskData) {
+        <mat-checkbox  class="field-from-left" formControlName="isCompleted">Задача завершена</mat-checkbox>
+      }
     </div>
 
     <div class="right">

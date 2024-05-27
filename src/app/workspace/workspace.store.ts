@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from "@angular/core";
 import {ComponentStore} from "@ngrx/component-store";
 import {SidebarState} from "./sidebar/sidebar.component";
-import {exhaustMap, finalize, Observable, Subject, tap, withLatestFrom} from "rxjs";
+import {mergeMap, finalize, Observable, Subject, tap, withLatestFrom} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ProjectCardState} from "./sidebar/project-card/project-card.component";
@@ -51,7 +51,7 @@ export class WorkspaceStore extends ComponentStore<WorkspaceState> implements On
 
   readonly loadWorkspace = this.effect((workspaceId$: Observable<number>) => {
     return workspaceId$.pipe(
-      exhaustMap((workspaceId) => this.projectService.getProjects(workspaceId).pipe(
+      mergeMap((workspaceId) => this.projectService.getProjects(workspaceId).pipe(
         tapResponse(
           (projectInfoDtos) => {
             const projectCardStates = projectInfoDtos.map<ProjectCardState>((projectInfo) => {
@@ -72,7 +72,7 @@ export class WorkspaceStore extends ComponentStore<WorkspaceState> implements On
   readonly createProject = this.effect((projectData$: Observable<{name: string, description: string}>) => {
     return projectData$.pipe(
       withLatestFrom(this.select(state => state.id!)),
-      exhaustMap(([projectData, workspaceId]) =>
+      mergeMap(([projectData, workspaceId]) =>
         this.projectService.postProject({
           name: projectData.name,
           description: projectData.description,

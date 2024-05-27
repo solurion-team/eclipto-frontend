@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from "@angular/core";
 import {ComponentStore} from "@ngrx/component-store";
-import {exhaustMap, Observable, of, Subject, tap, withLatestFrom} from "rxjs";
+import {mergeMap, Observable, of, Subject, tap, withLatestFrom} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {ProjectCardState} from "../workspace/sidebar/project-card/project-card.component";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -56,7 +56,7 @@ export class HomeStore extends ComponentStore<HomeState> implements OnDestroy {
 
   readonly loadHome = this.effect<void>((trigger$) =>
     trigger$.pipe(
-      exhaustMap(() => this.workspaceService.getWorkspaces().pipe(
+      mergeMap(() => this.workspaceService.getWorkspaces().pipe(
         tapResponse(
           (workspaceExtendedDtos) => {
             const projectCardStates = workspaceExtendedDtos.map<WorkspaceCardState>((dto) => this.mapToWorkspaceCardState(dto))
@@ -74,7 +74,7 @@ export class HomeStore extends ComponentStore<HomeState> implements OnDestroy {
 
   readonly createWorkspace = this.effect((workspaceData$: Observable<WorkspaceData>) => {
     return workspaceData$.pipe(
-      exhaustMap((workspaceData) =>
+      mergeMap((workspaceData) =>
         this.workspaceService.createWorkspace({
           name: workspaceData.name,
           description: workspaceData.description
@@ -96,7 +96,7 @@ export class HomeStore extends ComponentStore<HomeState> implements OnDestroy {
 
   readonly deleteWorkspace = this.effect((workspaceId$: Observable<number>) => {
     return workspaceId$.pipe(
-      exhaustMap((workspaceId) =>
+      mergeMap((workspaceId) =>
         this.workspaceService.deleteWorkspace(workspaceId).pipe(
           tapResponse(
             () => {

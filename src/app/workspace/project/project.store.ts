@@ -1,6 +1,6 @@
 import {ComponentStore} from "@ngrx/component-store";
 import {WorkspaceState} from "../workspace.store";
-import {exhaustMap, Observable, tap} from "rxjs";
+import {mergeMap, Observable, tap} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {ProjectCardState} from "../sidebar/project-card/project-card.component";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -39,7 +39,7 @@ export class ProjectStore extends ComponentStore<ProjectState> {
   readonly loadProject = this.effect((projectId$: Observable<number>) => {
     return projectId$.pipe(
       tap(_ => this.setState(() => ({isLoaded: false, isError: false}))),
-      exhaustMap((projectId) => this.projectService.getProjectInfo(projectId).pipe(
+      mergeMap((projectId) => this.projectService.getProjectInfo(projectId).pipe(
         tapResponse(
           (projectInfoDto) => {
             this.patchState((state) => {

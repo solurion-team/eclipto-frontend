@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ComponentStore} from "@ngrx/component-store";
 import {tapResponse} from "@ngrx/operators";
-import {exhaustMap, finalize, Observable, tap} from "rxjs";
+import {mergeMap, finalize, Observable, tap} from "rxjs";
 import {CookieService} from "ngx-cookie-service";
 import {LoginService} from "./login.service";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -46,7 +46,7 @@ export class LoginStore extends ComponentStore<LoginState>{
   readonly login = this.effect((credentials$: Observable<{email: string, password: string}>) => {
     return credentials$.pipe(
       tap((credentials) => this.patchState({...credentials, isLoading: true, isError: false})),
-      exhaustMap((credentials) => this.authService.login(credentials).pipe(
+      mergeMap((credentials) => this.authService.login(credentials).pipe(
         finalize(() => this.patchState({isLoading: false})),
         tapResponse(
           (response) => {

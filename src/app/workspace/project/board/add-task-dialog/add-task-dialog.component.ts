@@ -94,7 +94,8 @@ export class AddTaskDialogComponent implements OnInit {
         title: this.data.taskData.title,
         description: this.data.taskData.description,
         priority: this.data.taskData.priority,
-        date: this.data.taskData.date
+        date: this.data.taskData.date,
+        isCompleted: this.data.taskData.isCompleted
       });
     }
   }
@@ -103,7 +104,7 @@ export class AddTaskDialogComponent implements OnInit {
     const addTaskData: TaskData = {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description!,
-      isCompleted: false,
+      isCompleted: this.taskForm.value.isCompleted!,
       priority: this.taskForm.value.priority!,
       date: this.taskForm.value.date!,
       taskStatusId: this.data.taskStatusId

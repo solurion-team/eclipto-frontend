@@ -19,4 +19,7 @@ export * from './updateTaskStatusRequest';
 export * from './updateUserRequest';
 export * from './updateWorkspaceRequest';
 export * from './userInfoDto';
+export * from './workspaceAuthorityDto';
+export * from './workspaceExtendedDto';
 export * from './workspaceInfoDto';
+export * from './workspacePrivilege';

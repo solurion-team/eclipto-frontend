@@ -29,6 +29,9 @@ model/updateTaskStatusRequest.ts
 model/updateUserRequest.ts
 model/updateWorkspaceRequest.ts
 model/userInfoDto.ts
+model/workspaceAuthorityDto.ts
+model/workspaceExtendedDto.ts
 model/workspaceInfoDto.ts
+model/workspacePrivilege.ts
 param.ts
 variables.ts

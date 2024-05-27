@@ -1,76 +1,35 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Second</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="home.component.css">
-</head>
-<body>
-<app-search></app-search>
-  <div class="main-container">
-      <div class="search-container">
-        <h1 class="headingHome">Workspaces</h1>
-        <button class="newProject" (click)="createProject()">Создать workspace</button>
-        <input class="search" type="text" placeholder="Поиск по имени workspace" [(ngModel)]="searchQuery">
-      <table>
+<div class="main-container">
+  @if (isLoading$ | async) {
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  } @else {
+    <div class="search-container">
+      <div class="Workspace-container"><h1 class="Name-page">Рабочие пространства</h1>
+      <button mat-flat-button color="primary" (click)="createWorkspace()" class="Create-Workspace">Создать рабочее пространство</button>
+      <!--    <input class="search" type="text" placeholder="Поиск по имени workspace" [(ngModel)]="searchQuery">-->
+      </div>
+      <div class="table-container">
+        <table class="Workspaces">
+
         <thead>
         <tr>
-          <th class="first-name">Имя</th>
-          <th>Описание</th>
-          <th>Владелец</th>
+          <th style="width:30%" class="first-name">Имя</th>
+          <th style="width:40%">Описание</th>
+          <th style="width:20%">Владелец</th>
+          <th style="width:10%">Действие</th>
         </tr>
         </thead>
         <tbody>
-
-        <tr>
-          <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>Бизнес, управчляемый командой</td>
-          <td>Костоев Мурат</td>
-        </tr>
-        <tr>
-          <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>Бизнес, управчляемый командой</td>
-          <td>Костоев Мурат</td>
-        </tr>
-        <tr>
-          <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>Бизнес, управчляемый командой</td>
-          <td>Костоев Мурат</td>
-        </tr><tr>
-          <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>Бизнес, управчляемый командой</td>
-          <td>Костоев Мурат</td>
-        </tr>
-        <tr>
-          <td><span class="star">&#9734;</span>Eclipto</td>
-          <td>Бизнес, управчляемый командой</td>
-          <td>Костоев Мурат</td>
-        </tr>
-
-        <tr *ngFor="let project of filteredProjects">
-          <td><div *ngFor="let project of filteredProjects">
-            <span class="star-button" (click)="toggleFavorite(project)">
-              <span class="star">&#9734;</span>
-            </span>
-            <span>{{ project.name }}</span>
-          </div>
-          </td>
-          <td>{{ project.description }}</td>
-          <td>{{ project.director }}</td>
-        </tr>
+          @for (workspaceCardState of workspaceCarsStates$ | async; track workspaceCardState.id) {
+            <tr>
+              <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.name}}</td>
+              <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.description}}</td>
+              <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.ownerName}}</td>
+              <td (click)="deleteWorkspace(workspaceCardState.id)" class="centered"><mat-icon class="trashcan">delete</mat-icon></td>
+            </tr>
+          }
         </tbody>
       </table>
-      <div class="pagination">
-        <button class="previousPage" (click)="previousPage()" [disabled]="currentPage === 1">Предыдущая страница</button>
-        <span>{{ currentPage }} из {{ totalPages }}</span>
-        <button class="nextPage" (click)="nextPage()" [disabled]="currentPage === totalPages()">Следующая страница</button>
       </div>
     </div>
-  </div>
-
-
-</body>
-</html>
+  }
+</div>

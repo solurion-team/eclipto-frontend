@@ -15,7 +15,7 @@ export class CredentialsService {
   }
 
   public saveToken(token: string) {
-    this.cookieService.set(this.ACCESS_TOKEN_KEY, token, {secure: true, sameSite: "Strict"})
+    this.cookieService.set(this.ACCESS_TOKEN_KEY, token, {path: "/", secure: true, sameSite: "Strict"})
   }
 
   public saveUserId(userId: number) {

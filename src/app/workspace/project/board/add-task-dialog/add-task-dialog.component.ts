@@ -14,6 +14,7 @@ import { MatIcon } from "@angular/material/icon";
 import { MatCard } from "@angular/material/card";
 import { DatePipe, NgIf } from "@angular/common";
 import { provideNativeDateAdapter } from "@angular/material/core";
+import {MatCheckbox} from "@angular/material/checkbox";
 
 export interface TaskData {
   id?: number;
@@ -61,7 +62,8 @@ export interface AddTaskDialogResult {
     MatDialogActions,
     MatDialogContent,
     MatDialogTitle,
-    MatLabel
+    MatLabel,
+    MatCheckbox
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-task-dialog.component.html',

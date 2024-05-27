@@ -28,11 +28,10 @@
         <mat-label>Введите пароль</mat-label>
         <input matInput formControlName="password" type="password" placeholder="Введите пароль" required>
       </mat-form-field>
-<!--      <div *ngIf="isError$ | async" class="error-text">Неправильная почта или пароль</div>-->
-      <button mat-raised-button color="basic" type="submit" [disabled]="registerForm.invalid">
+      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
         Продолжить
       </button>
-      <mat-button-toggle routerLink="/login" color="primary" class="log-in">
+      <mat-button-toggle routerLink="/login" color="basic" class="log-in">
         Войти
       </mat-button-toggle>
     </form>

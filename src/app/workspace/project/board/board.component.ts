@@ -18,7 +18,7 @@ import {
 } from "./add-task-dialog/add-task-dialog.component";
 import { AddTaskStatusDialogComponent } from "./add-task-status-dialog/add-task-status-dialog.component";
 import { ProjectCardComponent } from "../../sidebar/project-card/project-card.component";
-import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import { MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from "@angular/material/datepicker";
 import { MatFormField, MatHint, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
@@ -33,6 +33,7 @@ import {
   CdkDrag,
   CdkDropList
 } from '@angular/cdk/drag-drop';
+import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 
 @Component({
   selector: 'app-board',
@@ -61,7 +62,10 @@ import {
     MatMenuItem,
     DragDropModule,
     NgForOf,
-    NgIf
+    NgIf,
+    MatRadioButton,
+    MatRadioGroup,
+    NgClass
   ],
   providers: [provideComponentStore(BoardStore), provideNativeDateAdapter()],
   templateUrl: './board.component.html',
@@ -133,6 +137,10 @@ export class BoardComponent implements OnInit {
 
   deleteTask(taskStatusId: number, taskId: number) {
     this.boardStore.deleteTask({taskStatusId, taskId})
+  }
+
+  filterTasks(completed: string) {
+    return
   }
 }
 

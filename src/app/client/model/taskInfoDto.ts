@@ -24,6 +24,10 @@ export interface TaskInfoDto {
     title: string;
     description?: string | null;
     /**
+     * Position index of the task
+     */
+    index: number;
+    /**
      * 
      */
     status: TaskStatusDto;
@@ -45,6 +49,10 @@ export interface TaskInfoDto {
      * updated_at
      */
     updated_at: string;
+    /**
+     * Completed task
+     */
+    is_completed: boolean;
 }
 export namespace TaskInfoDto {
 }

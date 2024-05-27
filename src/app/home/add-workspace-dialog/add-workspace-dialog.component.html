@@ -1,0 +1,16 @@
+<mat-dialog-content>
+  <h2 mat-dialog-title>Новое рабочее пространство</h2>
+  <form [formGroup]="workspaceForm" (ngSubmit)="submitForm()">
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="name" placeholder="Название пространства">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <textarea matInput formControlName="description" placeholder="Описание пространства"></textarea>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!workspaceForm.valid" (click)="submitForm()">Submit</button>
+</mat-dialog-actions>

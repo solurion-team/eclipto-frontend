@@ -9,21 +9,22 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Priority } from './priority';
+import { UserInfoDto } from './userInfoDto';
 
 
-export interface UpdateTaskRequest { 
-    title?: string | null;
+export interface WorkspaceExtendedDto { 
+    /**
+     * ID of the workspace
+     */
+    id: number;
+    /**
+     * Workspace name, which identifies the workspace to the user
+     */
+    name: string;
     description?: string | null;
-    index?: number | null;
-    status_id?: number | null;
-    priority?: Priority | null;
-    due_date?: string | null;
-    assigned_user_id?: number | null;
-    reporter_user_id?: number | null;
-    is_completed?: boolean | null;
+    /**
+     * Workspace owner user id
+     */
+    owner: UserInfoDto;
 }
-export namespace UpdateTaskRequest {
-}
-
 

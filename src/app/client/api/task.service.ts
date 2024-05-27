@@ -181,18 +181,23 @@ export class TaskService {
      * Tasks
      * Get all project tasks with full information
      * @param projectId 
+     * @param isCompleted 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllTasks(projectId?: number, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<TaskInfoDto>>;
-    public getAllTasks(projectId?: number, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<TaskInfoDto>>>;
-    public getAllTasks(projectId?: number, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<TaskInfoDto>>>;
-    public getAllTasks(projectId?: number, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public getAllTasks(projectId?: number, isCompleted?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<TaskInfoDto>>;
+    public getAllTasks(projectId?: number, isCompleted?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<TaskInfoDto>>>;
+    public getAllTasks(projectId?: number, isCompleted?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<TaskInfoDto>>>;
+    public getAllTasks(projectId?: number, isCompleted?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (projectId !== undefined && projectId !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>projectId, 'projectId');
+        }
+        if (isCompleted !== undefined && isCompleted !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>isCompleted, 'isCompleted');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -334,13 +339,14 @@ export class TaskService {
      * Get task statuses
      * @param projectId ID of a project
      * @param includeTasks 
+     * @param isCompleted 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<TaskStatusDto>>;
-    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<TaskStatusDto>>>;
-    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<TaskStatusDto>>>;
-    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
+    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, isCompleted?: boolean, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<Array<TaskStatusDto>>;
+    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, isCompleted?: boolean, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpResponse<Array<TaskStatusDto>>>;
+    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, isCompleted?: boolean, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<HttpEvent<Array<TaskStatusDto>>>;
+    public getProjectTaskStatuses(projectId: number, includeTasks?: boolean, isCompleted?: boolean, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext, transferCache?: boolean}): Observable<any> {
         if (projectId === null || projectId === undefined) {
             throw new Error('Required parameter projectId was null or undefined when calling getProjectTaskStatuses.');
         }
@@ -349,6 +355,10 @@ export class TaskService {
         if (includeTasks !== undefined && includeTasks !== null) {
           localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
             <any>includeTasks, 'includeTasks');
+        }
+        if (isCompleted !== undefined && isCompleted !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>isCompleted, 'isCompleted');
         }
 
         let localVarHeaders = this.defaultHeaders;

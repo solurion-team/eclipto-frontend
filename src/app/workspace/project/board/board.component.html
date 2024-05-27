@@ -5,10 +5,10 @@
   </button>
   <mat-menu #filterMenu="matMenu">
     <div class="filter-options">
-      <mat-radio-group [selected]="all" aria-label="Фильтр задач" class="filter-radio-group">
-        <mat-radio-button value="completed" (click)="filterTasks(TaskFilter.Completed)">Выполненные</mat-radio-button>
-        <mat-radio-button value="unfinished" (click)="filterTasks(TaskFilter.InProgress)">В процессе</mat-radio-button>
-        <mat-radio-button #all value="all" (click)="filterTasks(TaskFilter.All)">Все</mat-radio-button>
+      <mat-radio-group [selected]="all" aria-label="Фильтр задач" class="filter-radio-group" (change)="filterTasks($event.value)">
+        <mat-radio-button [value]="TaskFilter.Completed">Выполненные</mat-radio-button>
+        <mat-radio-button [value]="TaskFilter.InProgress">В процессе</mat-radio-button>
+        <mat-radio-button #all [value]="TaskFilter.All">Все</mat-radio-button>
       </mat-radio-group>
     </div>
   </mat-menu>

@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "release": "ng serve --configuration production",
     "test": "ng test",
     "generate-client-user": "openapi-generator-cli generate -i ..\\eclipto-backend\\microservices\\user\\openapi.yaml -g typescript-angular -o ./src/app/client/",
     "generate-client-task": "openapi-generator-cli generate -i ..\\eclipto-backend\\microservices\\task\\openapi.yaml -g typescript-angular -o ./src/app/client/",

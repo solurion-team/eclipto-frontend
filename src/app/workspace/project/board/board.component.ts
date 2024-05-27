@@ -1,37 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { provideComponentStore } from "@ngrx/component-store";
-import { ProjectStore } from "../project.store";
-import {BoardStore, TaskCard, TaskStatusContainer} from "./board.store";
-import { WorkspaceStore } from "../../workspace.store";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AddProjectDialogComponent } from "../../add-project-dialog/add-project-dialog.component";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from "@angular/material/button";
-import { MatIcon } from "@angular/material/icon";
-import { MatButtonToggle } from "@angular/material/button-toggle";
-import { MatCard, MatCardContent } from "@angular/material/card";
+import {Component, OnInit} from '@angular/core';
+import {provideComponentStore} from "@ngrx/component-store";
+import {BoardStore, TaskCard, TaskFilter, TaskStatusContainer} from "./board.store";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MatButton, MatFabButton, MatIconButton, MatMiniFabButton} from "@angular/material/button";
+import {MatIcon} from "@angular/material/icon";
+import {MatButtonToggle} from "@angular/material/button-toggle";
+import {MatCard, MatCardContent} from "@angular/material/card";
 import {
   AddTaskDialogComponent,
   AddTaskDialogResult,
   TaskData,
   UpdateTaskData
 } from "./add-task-dialog/add-task-dialog.component";
-import { AddTaskStatusDialogComponent } from "./add-task-status-dialog/add-task-status-dialog.component";
-import { ProjectCardComponent } from "../../sidebar/project-card/project-card.component";
+import {AddTaskStatusDialogComponent} from "./add-task-status-dialog/add-task-status-dialog.component";
+import {ProjectCardComponent} from "../../sidebar/project-card/project-card.component";
 import {AsyncPipe, NgClass, NgForOf, NgIf} from "@angular/common";
-import { MatDatepicker, MatDatepickerInput, MatDatepickerToggle } from "@angular/material/datepicker";
-import { MatFormField, MatHint, MatLabel } from "@angular/material/form-field";
-import { MatInput } from "@angular/material/input";
-import { ReactiveFormsModule } from "@angular/forms";
-import { provideNativeDateAdapter } from "@angular/material/core";
-import { MatMenu, MatMenuItem, MatMenuTrigger } from "@angular/material/menu";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {ReactiveFormsModule} from "@angular/forms";
+import {provideNativeDateAdapter} from "@angular/material/core";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {
-  DragDropModule,
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
   CdkDrag,
-  CdkDropList
+  CdkDragDrop,
+  CdkDropList,
+  DragDropModule,
+  moveItemInArray,
+  transferArrayItem
 } from '@angular/cdk/drag-drop';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 
@@ -87,7 +83,7 @@ export class BoardComponent implements OnInit {
     this.boardStore.taskDataLoadedEvent$.subscribe({
       next: (data) => this.openAddTaskDialog(data.taskStatusId, data)
     })
-    this.boardStore.loadBoard()
+    this.boardStore.loadBoard(TaskFilter.All)
   }
 
   openAddTaskDialog(taskStatusId: number, taskData?: TaskData) {
@@ -139,9 +135,11 @@ export class BoardComponent implements OnInit {
     this.boardStore.deleteTask({taskStatusId, taskId})
   }
 
-  filterTasks(completed: string) {
-    return
+  filterTasks(taskFilter: TaskFilter) {
+    this.boardStore.loadBoard(taskFilter)
   }
+
+  protected readonly TaskFilter = TaskFilter;
 }
 
 

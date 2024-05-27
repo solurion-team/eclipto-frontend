@@ -5,10 +5,10 @@
   </button>
   <mat-menu #filterMenu="matMenu">
     <div class="filter-options">
-      <mat-radio-group aria-label="Task Filter" class="filter-radio-group">
-        <mat-radio-button value="completed" (click)="filterTasks('completed')">Completed Tasks</mat-radio-button>
-        <mat-radio-button value="unfinished" (click)="filterTasks('unfinished')">Unfinished Tasks</mat-radio-button>
-        <mat-radio-button value="all" (click)="filterTasks('all')">All Tasks</mat-radio-button>
+      <mat-radio-group [selected]="all" aria-label="Фильтр задач" class="filter-radio-group">
+        <mat-radio-button value="completed" (click)="filterTasks(TaskFilter.Completed)">Выполненные</mat-radio-button>
+        <mat-radio-button value="unfinished" (click)="filterTasks(TaskFilter.InProgress)">В процессе</mat-radio-button>
+        <mat-radio-button #all value="all" (click)="filterTasks(TaskFilter.All)">Все</mat-radio-button>
       </mat-radio-group>
     </div>
   </mat-menu>
@@ -34,6 +34,7 @@
             @for (task of taskStatus.tasks; track task.id) {
               <div
                 class="task-card"
+                [class.completed]="task.isCompleted"
                 [ngClass]="{'selected': task.isCompleted}"
                 cdkDrag
                 [cdkDragData]="task"

@@ -32,7 +32,7 @@ export class WorkspaceComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params =>
-      this.workspaceStore.loadWorkspace(params["id"])
+      this.workspaceStore.loadWorkspace(+params["id"])
     )
     this.workspaceStore.currentProjectId$.subscribe({
       next: value => value && this.router.navigate([`./project/${value}`], {relativeTo: this.route}).then(r => {

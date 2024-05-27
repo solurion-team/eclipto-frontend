@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {ComponentStore} from "@ngrx/component-store";
 import {CookieService} from "ngx-cookie-service";
-import {exhaustMap, finalize, Observable, tap} from "rxjs";
+import {mergeMap, finalize, Observable, tap} from "rxjs";
 import {tapResponse} from "@ngrx/operators";
 import {HttpErrorResponse} from "@angular/common/http";
 import {RegisterService} from "./register.service";
@@ -61,7 +61,7 @@ export class RegisterStore extends ComponentStore<RegisterState>{
   readonly register = this.effect((userData$: Observable<UserData>) => {
     return userData$.pipe(
       tap((userData) => this.patchState({...userData, isLoading: true, isError: false})),
-      exhaustMap((userData) => this.authService.register(
+      mergeMap((userData) => this.authService.register(
         {first_name: userData.firstName, last_name: userData.lastName, email: userData.email, password: userData.password}
       ).pipe(
         finalize(() => this.patchState({isLoading: false})),

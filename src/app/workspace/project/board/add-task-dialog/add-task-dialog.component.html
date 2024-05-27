@@ -39,7 +39,7 @@
       </mat-form-field>
 
       <mat-card *ngIf="calendarVisible" class="demo-inline-calendar-card">
-        <mat-calendar [(selected)]="taskForm.value.date" (selectedChange)="saveDate($event)"></mat-calendar>
+        <mat-calendar [minDate]="minDate" [(selected)]="taskForm.value.date" (selectedChange)="saveDate($event)"></mat-calendar>
       </mat-card>
     </div>
 

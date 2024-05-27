@@ -2,22 +2,72 @@
   margin-top: 20px;
 }
 
-
 form {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
-
 
 mat-form-field {
   width: 100%;
 }
 
-
 button {
   margin-right: 10px;
+  height: 40px;
+  width: 100px;
+  font-size: 1.3em;
 }
 
+mat-card {
+  width: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+mat-dialog-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 
 mat-dialog-content {
-  background-color: white;
+  /*background-color: #008080; !* Бирюзовый цвет *!*/
+  flex: 1;
+  overflow: auto;
+  min-height: 450px;
 }
+
+mat-dialog-actions {
+  /*background-color: #9900ff; !* Фиолетовый цвет *!*/
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  flex-shrink: 0;
+}
+
+.button-for-date {
+  width: 100%;
+  text-align: left !important;
+}
+
+.button-for-save {
+  width: 50%;
+}
+
+mat-calendar {
+  margin-top: 30px;
+  color: #3131ff;
+  height: 30%;
+}
+
+mat-checkbox {
+  margin-bottom: 10px;
+}
+
+/*.mat-checkbox-checked.mat-accent .mat-checkbox-checkmark-path {*/
+/*  stroke: #00f7ff !important;
+/*}*/

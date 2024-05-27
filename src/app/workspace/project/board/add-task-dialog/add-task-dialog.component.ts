@@ -1,27 +1,46 @@
-import {Component, Inject} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle
+  MAT_DIALOG_DATA, MatDialogActions, MatDialogContent,
+  MatDialogRef, MatDialogTitle
 } from "@angular/material/dialog";
-import {MatFormField, MatLabel} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {AddProjectDialogComponent} from "../../../add-project-dialog/add-project-dialog.component";
-import {MatOption, MatSelect} from "@angular/material/select";
-import {Priority} from "../../../../client/model/priority";
-import {MatDatepickerToggle} from "@angular/material/datepicker";
+import { MatButton } from "@angular/material/button";
+import { MatFormField, MatHint, MatLabel } from "@angular/material/form-field";
+import { MatInput } from "@angular/material/input";
+import { MatOption, MatSelect } from "@angular/material/select";
+import { Priority } from "../../../../client/model/priority";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatIcon } from "@angular/material/icon";
+import { MatCard } from "@angular/material/card";
+import { DatePipe, NgIf } from "@angular/common";
+import { provideNativeDateAdapter } from "@angular/material/core";
+import {MatCheckbox} from "@angular/material/checkbox";
 
+export interface TaskData {
+  id?: number;
+  title: string;
+  description?: string | null;
+  isCompleted: boolean;
+  priority: Priority;
+  assignedUserId?: number | null;
+  taskStatusId: number;
+  date?: Date;
+}
 
-export interface AddTaskData {
-  title: string
-  description: string
-  priority: Priority
-  assignedUserId?: number
-  taskStatusId: number
+export interface UpdateTaskData {
+  id: number;
+  title?: string | null;
+  description?: string | null;
+  isCompleted?: boolean | null;
+  priority?: Priority | null;
+  assignedUserId?: number | null;
+  taskStatusId?: number | null;
+  date?: Date | null;
+}
+
+export interface AddTaskDialogResult {
+  update: boolean,
+  taskData: TaskData | UpdateTaskData
 }
 
 @Component({
@@ -30,46 +49,87 @@ export interface AddTaskData {
   imports: [
     FormsModule,
     MatButton,
-    MatDialogActions,
-    MatDialogContent,
     MatFormField,
     MatInput,
     ReactiveFormsModule,
     MatSelect,
     MatOption,
+    MatDatepickerModule,
+    MatIcon,
+    MatCard,
+    DatePipe,
+    NgIf,
+    MatDialogActions,
+    MatDialogContent,
     MatDialogTitle,
     MatLabel,
-    MatDatepickerToggle,
+    MatCheckbox
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './add-task-dialog.component.html',
-  styleUrl: './add-task-dialog.component.css'
+  styleUrls: ['./add-task-dialog.component.css']
 })
-export class AddTaskDialogComponent {
+export class AddTaskDialogComponent implements OnInit {
+  calendarVisible: boolean = false;
+
   taskForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(1)]),
     description: new FormControl('', []),
     priority: new FormControl<Priority>('medium', [Validators.required]),
-    // date: new FormControl('', [])
+    date: new FormControl<Date | null>(null),
+    isCompleted: new FormControl<boolean>(false)
   });
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: {taskStatusId: number},
-    private readonly dialogRef: MatDialogRef<AddProjectDialogComponent>
-  ) {
+    @Inject(MAT_DIALOG_DATA) public data: { taskStatusId: number, taskData?: TaskData },
+    private readonly dialogRef: MatDialogRef<AddTaskDialogComponent>
+  ) { }
+
+  ngOnInit(): void {
+    if (this.data.taskData) {
+      this.taskForm.patchValue({
+        title: this.data.taskData.title,
+        description: this.data.taskData.description,
+        priority: this.data.taskData.priority,
+        date: this.data.taskData.date
+      });
+    }
   }
 
   submitForm() {
-    const data: AddTaskData = {
+    const addTaskData: TaskData = {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description!,
+      isCompleted: false,
       priority: this.taskForm.value.priority!,
-      // date: this.taskForm.value.date,
+      date: this.taskForm.value.date!,
       taskStatusId: this.data.taskStatusId
+    };
+    if (this.data.taskData) {
+      addTaskData.id = this.data.taskData.id!;
+      if (addTaskData === this.data.taskData) {
+        this.dialogRef.close();
+        return
+      }
+      this.dialogRef.close(<AddTaskDialogResult>{update: true, taskData: addTaskData});
+      return
     }
-    this.dialogRef.close(data);
+    this.dialogRef.close(<AddTaskDialogResult>{update: false, taskData: addTaskData});
   }
 
   closeDialog() {
-    this.dialogRef.close()
+    this.dialogRef.close();
+  }
+
+  openCalendar() {
+    this.calendarVisible = true;
+  }
+
+  saveDate(date: Date | undefined | null ) {
+    if (date) {
+      this.taskForm.patchValue({ date: date });
+      this.calendarVisible = false;
+    }
   }
 }
+

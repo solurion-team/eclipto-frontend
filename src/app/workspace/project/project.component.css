@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  width: 100vw;
+  width: 82vw;
   flex-direction: column;
   margin-left: 50px;
   transition: transform 0.5s ease-in-out;
@@ -16,7 +16,7 @@
 }
 
 .project-workspace {
-  height: 800px;
+  height: 77vh;
   background-color: white;
 }
 

@@ -1,9 +1,11 @@
+<h2 mat-dialog-title>Create new task</h2>
 <mat-dialog-content>
-  <h2 mat-dialog-title>Create new task</h2>
-
   <form [formGroup]="taskForm" (ngSubmit)="submitForm()">
+
+    <mat-checkbox formControlName="isCompleted">Задача завершена</mat-checkbox>
+
     <mat-form-field appearance="fill">
-      <input matInput formControlName="title" placeholder="Название проекта">
+      <input maxlength="21" matInput formControlName="title" placeholder="Название проекта">
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -20,10 +22,17 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <input matInput type="datetime-local" placeholder="Введите дату">
+      <mat-label>Введите дату</mat-label>
+      <input matInput formControlName="date" readonly (focus)="openCalendar()">
     </mat-form-field>
+
+    <mat-card *ngIf="calendarVisible" class="demo-inline-calendar-card">
+      <mat-calendar [(selected)]="taskForm.value.date" (selectedChange)="saveDate($event)"></mat-calendar>
+    </mat-card>
+
   </form>
 </mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Close</button>
   <button mat-raised-button color="primary" type="submit" [disabled]="!taskForm.valid" (click)="submitForm()">Create</button>

@@ -89,7 +89,10 @@ mat-dialog-content {
   background-color: white;
 }
 
-
+/*mat-dialog-actions {*/
+/*  position: relative;*/
+/*  bottom: 0;*/
+/*}*/
 
 
 

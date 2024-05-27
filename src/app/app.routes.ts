@@ -12,7 +12,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [authenticatedGuard] },
   { path: 'workspace/:id', component: WorkspaceComponent, children: workspaceRoutes, canActivate: [authenticatedGuard] },
-  { path: '**', redirectTo: '/login' },
+  { path: '**', redirectTo: '/home' },
 ];
 
 

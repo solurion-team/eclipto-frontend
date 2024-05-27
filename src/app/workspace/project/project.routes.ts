@@ -9,4 +9,5 @@ export const projectRoutes: Routes = [
   { path: 'list', component: TaskListComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'settings', component: SettingsComponent },
+  { path: '**', redirectTo: 'board' },
 ];

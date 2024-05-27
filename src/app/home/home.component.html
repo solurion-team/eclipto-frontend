@@ -12,9 +12,10 @@
 
         <thead>
         <tr>
-          <th class="first-name">Имя</th>
-          <th>Описание</th>
-          <th>Владелец</th>
+          <th style="width:30%" class="first-name">Имя</th>
+          <th style="width:40%">Описание</th>
+          <th style="width:20%">Владелец</th>
+          <th style="width:10%">Действие</th>
         </tr>
         </thead>
         <tbody>
@@ -23,7 +24,7 @@
               <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.name}}</td>
               <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.description}}</td>
               <td (click)="openWorkspace(workspaceCardState.id)">{{workspaceCardState.ownerName}}</td>
-              <mat-icon class="trashcan" (click)="deleteWorkspace(workspaceCardState.id); $event.stopPropagation()">delete</mat-icon>
+              <td (click)="deleteWorkspace(workspaceCardState.id)" class="centered"><mat-icon class="trashcan">delete</mat-icon></td>
             </tr>
           }
         </tbody>

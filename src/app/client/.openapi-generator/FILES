@@ -16,7 +16,9 @@ model/jwtAuthenticationResponse.ts
 model/loginRequest.ts
 model/models.ts
 model/priority.ts
+model/projectAuthorityDto.ts
 model/projectInfoDto.ts
+model/projectPrivilege.ts
 model/registerRequest.ts
 model/taskInfoDto.ts
 model/taskLiteDto.ts
@@ -27,6 +29,9 @@ model/updateTaskStatusRequest.ts
 model/updateUserRequest.ts
 model/updateWorkspaceRequest.ts
 model/userInfoDto.ts
+model/workspaceAuthorityDto.ts
+model/workspaceExtendedDto.ts
 model/workspaceInfoDto.ts
+model/workspacePrivilege.ts
 param.ts
 variables.ts

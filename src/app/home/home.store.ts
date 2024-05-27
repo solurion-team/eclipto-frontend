@@ -8,6 +8,7 @@ import {TaskStatusContainer} from "../workspace/project/board/board.store";
 import {CredentialsService} from "../data/credentials.service";
 import {AddTaskStatusData} from "../workspace/project/board/add-task-status-dialog/add-task-status-dialog.component";
 import {WorkspaceService} from "../client/api/workspace.service";
+import {WorkspaceExtendedDto} from "../client/model/workspaceExtendedDto";
 
 export interface HomeState {
   isLoading: boolean,
@@ -18,14 +19,13 @@ export interface HomeState {
 export interface WorkspaceCardState {
   id: number,
   name: string,
-  description?: string,
+  description?: string | null,
   ownerName: string
 }
 
 export interface WorkspaceData {
   name: string
-  description?: string
-  ownerId: number
+  description?: string | null
 }
 
 const initialState: HomeState = {
@@ -54,76 +54,81 @@ export class HomeStore extends ComponentStore<HomeState> implements OnDestroy {
   readonly isError$ = this.select(state => state.isError);
   readonly workspaceCarsStates$ = this.select(state => state.workspaceCarsStates);
 
-
   readonly loadHome = this.effect<void>((trigger$) =>
     trigger$.pipe(
-      exhaustMap((_ ) => {
-        this.patchState({
-          isLoading: false,
-          workspaceCarsStates: [
-            {id: 1, name: "Eclipto", description: "Some description", ownerName: "pasdkfpasdokf"},
-            {id: 2, name: "Workssp", description: "aaaaaaaaaaaaaaaaaaaaaaaaaaaa", ownerName: "Me"},
-            {id: 3, name: "asdfsdfds", description: "123123123123", ownerName: "11111"},
-            {id: 4, name: "uuuuuu", description: "d", ownerName: "1"},
-            {id: 5, name: "NotEclipto", description: "Not Some description", ownerName: "nopt pasdkfpasdokf"}
-          ]
-        })
-
-        return of()
-      })
+      exhaustMap(() => this.workspaceService.getWorkspaces().pipe(
+        tapResponse(
+          (workspaceExtendedDtos) => {
+            const projectCardStates = workspaceExtendedDtos.map<WorkspaceCardState>((dto) => this.mapToWorkspaceCardState(dto))
+            this.patchState((state) =>
+              ({isLoading: false, workspaceCarsStates: projectCardStates})
+            )
+          },
+          (error: HttpErrorResponse) => {
+            console.log(error)
+          }
+        )
+      ))
     )
   )
 
   readonly createWorkspace = this.effect((workspaceData$: Observable<WorkspaceData>) => {
     return workspaceData$.pipe(
-      exhaustMap((workspaceData) => {
-        this.patchState((state) => ({
-          workspaceCarsStates: [
-            ...state.workspaceCarsStates,
-            {id: state.workspaceCarsStates.length + 1, name: workspaceData.name, description: workspaceData.description, ownerName: "sdfsdf"}
-          ]
-        }))
-        return of()
-      })
+      exhaustMap((workspaceData) =>
+        this.workspaceService.createWorkspace({
+          name: workspaceData.name,
+          description: workspaceData.description
+        }).pipe(
+          tapResponse(
+            (workspaceDto) => {
+              this.patchState((state) => ({
+                workspaceCarsStates: [...state.workspaceCarsStates, this.mapToWorkspaceCardState(workspaceDto)]
+              }))
+            },
+            (error: HttpErrorResponse) => {
+              console.log(error)
+            }
+          )
+        )
+      )
     )
   })
 
-  // readonly addWorkspace = this.effect((workspaceData$: Observable<WorkspaceData>) => {
-  //   return workspaceData$.pipe(
-  //     exhaustMap((taskStatusData) => this.taskService.postTaskStatus({
-  //       name: taskStatusData.name,
-  //       tint: taskStatusData.tint,
-  //       project_id: projectId!
-  //     }).pipe(
-  //       tapResponse(
-  //         (taskStatusDto) => {
-  //           const taskStatusContainer = this.mapToTaskStatusContainer(taskStatusDto)
-  //           this.patchState((state) =>
-  //             ({isLoading: false, taskStatuses: [...state.taskStatuses, taskStatusContainer]})
-  //           )
-  //         },
-  //         (error: HttpErrorResponse) => {
-  //           this.patchState((state) => ({isError: true}))
-  //         }
-  //       )
-  //     ))
-  //   )
-  // })
+  readonly deleteWorkspace = this.effect((workspaceId$: Observable<number>) => {
+    return workspaceId$.pipe(
+      exhaustMap((workspaceId) =>
+        this.workspaceService.deleteWorkspace(workspaceId).pipe(
+          tapResponse(
+            () => {
+              this.patchState(state => ({
+                workspaceCarsStates: state.workspaceCarsStates.filter(workspace => workspace.id !== workspaceId)
+              }));
+            },
+            (error: HttpErrorResponse) => {
+              console.log(error)
+            }
+          )
+        )
+      )
+    )
+  })
 
   navigateToWorkspace(id: number) {
     this._navigateToWorkspaceEvent$.next(id)
+  }
+
+  mapToWorkspaceCardState(workspaceExtendedDto: WorkspaceExtendedDto): WorkspaceCardState {
+    return {
+      id: workspaceExtendedDto.id,
+      name: workspaceExtendedDto.name,
+      description: workspaceExtendedDto.description,
+      ownerName: workspaceExtendedDto.owner.first_name + " " + workspaceExtendedDto.owner.last_name
+    };
   }
 
   override ngOnDestroy() {
     super.ngOnDestroy();
 
     this._navigateToWorkspaceEvent$.complete()
-  }
-  deleteWorkspace(id: number): void {
-    this.workspaceService.deleteWorkspace(id).subscribe(() => {
-      this.patchState(state => ({
-        workspaceCarsStates: state.workspaceCarsStates.filter(workspace => workspace.id !== id)
-      }));
-    });
   }
 }

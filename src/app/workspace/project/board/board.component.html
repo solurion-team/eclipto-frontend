@@ -24,7 +24,7 @@
           (cdkDropListDropped)="drop($event, taskStatus)"
           [cdkDropListSortPredicate]="sortPredicate">
 
-          <span class="title-for-column">{{ taskStatus.name }}</span>
+          <div class="title-for-column" [style.background-color]=getTransparentTint(taskStatus.tint) [style.color]=taskStatus.tint>{{ taskStatus.name }}</div>
           <button mat-raised-button class="create-task-card" (click)="openAddTaskDialog(taskStatus.id)">
             <mat-icon>add</mat-icon>
             <span class="text-create">Создать</span>

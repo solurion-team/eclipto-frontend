@@ -139,6 +139,18 @@ export class BoardComponent implements OnInit {
     this.boardStore.deleteTask({taskStatusId, taskId})
   }
 
+  getTransparentTint(tint: string): string {
+    const alpha = 0.1;
+
+    if (tint.startsWith('#')) {
+      const r = parseInt(tint.slice(1, 3), 16);
+      const g = parseInt(tint.slice(3, 5), 16);
+      const b = parseInt(tint.slice(5, 7), 16);
+      return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+    return tint;
+  }
+
   filterTasks(completed: string) {
     return
   }

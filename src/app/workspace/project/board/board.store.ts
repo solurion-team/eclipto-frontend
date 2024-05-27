@@ -108,7 +108,6 @@ export class BoardStore extends ComponentStore<BoardState> implements OnDestroy 
         description: taskData.description,
         index: 1,
         status_id: taskData.taskStatusId,
-        index: 1,
         priority: taskData.priority,
         due_date: taskData.date ? taskData.date.toISOString() : null,
         reporter_user_id: this.credentialsService.userId,

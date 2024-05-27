@@ -74,6 +74,7 @@ export interface AddTaskDialogResult {
 })
 export class AddTaskDialogComponent implements OnInit {
   calendarVisible: boolean = false;
+  readonly minDate = new Date();
 
   taskForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(1)]),

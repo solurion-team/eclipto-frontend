@@ -18,17 +18,28 @@ import { provideNativeDateAdapter } from "@angular/material/core";
 export interface TaskData {
   id?: number;
   title: string;
-  description: string | null | undefined ;
+  description?: string | null;
   isCompleted: boolean;
   priority: Priority;
-  assignedUserId?: number | null | undefined ;
+  assignedUserId?: number | null;
   taskStatusId: number;
   date?: Date;
 }
 
+export interface UpdateTaskData {
+  id: number;
+  title?: string | null;
+  description?: string | null;
+  isCompleted?: boolean | null;
+  priority?: Priority | null;
+  assignedUserId?: number | null;
+  taskStatusId?: number | null;
+  date?: Date | null;
+}
+
 export interface AddTaskDialogResult {
   update: boolean,
-  taskData: TaskData
+  taskData: TaskData | UpdateTaskData
 }
 
 @Component({
@@ -63,7 +74,8 @@ export class AddTaskDialogComponent implements OnInit {
     title: new FormControl('', [Validators.required, Validators.minLength(1)]),
     description: new FormControl('', []),
     priority: new FormControl<Priority>('medium', [Validators.required]),
-    date: new FormControl<Date | null>(null)
+    date: new FormControl<Date | null>(null),
+    isCompleted: new FormControl<boolean>(false)
   });
 
   constructor(
@@ -91,7 +103,6 @@ export class AddTaskDialogComponent implements OnInit {
       date: this.taskForm.value.date!,
       taskStatusId: this.data.taskStatusId
     };
-    console.log(addTaskData)
     if (this.data.taskData) {
       addTaskData.id = this.data.taskData.id!;
       if (addTaskData === this.data.taskData) {

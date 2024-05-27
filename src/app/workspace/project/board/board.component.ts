@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { provideComponentStore } from "@ngrx/component-store";
 import { ProjectStore } from "../project.store";
-import {BoardStore, TaskCard} from "./board.store";
+import {BoardStore, TaskCard, TaskStatusContainer} from "./board.store";
 import { WorkspaceStore } from "../../workspace.store";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AddProjectDialogComponent } from "../../add-project-dialog/add-project-dialog.component";
@@ -10,7 +10,12 @@ import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from "@angul
 import { MatIcon } from "@angular/material/icon";
 import { MatButtonToggle } from "@angular/material/button-toggle";
 import { MatCard, MatCardContent } from "@angular/material/card";
-import {AddTaskDialogComponent, AddTaskDialogResult, TaskData} from "./add-task-dialog/add-task-dialog.component";
+import {
+  AddTaskDialogComponent,
+  AddTaskDialogResult,
+  TaskData,
+  UpdateTaskData
+} from "./add-task-dialog/add-task-dialog.component";
 import { AddTaskStatusDialogComponent } from "./add-task-status-dialog/add-task-status-dialog.component";
 import { ProjectCardComponent } from "../../sidebar/project-card/project-card.component";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
@@ -89,9 +94,9 @@ export class BoardComponent implements OnInit {
     });
     this.addTaskDialogRef.afterClosed().subscribe((result: AddTaskDialogResult) => {
       if (result && result.update) {
-        this.boardStore.updateTask(result.taskData)
+        this.boardStore.updateTask(result.taskData as UpdateTaskData)
       } else if (result) {
-        this.boardStore.addTask(result.taskData)
+        this.boardStore.addTask(result.taskData as TaskData)
       }
     })
   }
@@ -104,10 +109,11 @@ export class BoardComponent implements OnInit {
     this.addTaskStatusDialogRef.afterClosed().subscribe(result => result && this.boardStore.addTaskStatus(result))
   }
 
-  drop(event: CdkDragDrop<any[]>, taskStatus: any) {
+  drop(event: CdkDragDrop<any[]>, taskStatus: TaskStatusContainer) {
     if (event.previousContainer === event.container) {
       moveItemInArray(taskStatus.tasks, event.previousIndex, event.currentIndex);
     } else {
+      this.boardStore.updateTask({id: event.item.data.id, taskStatusId: taskStatus.id})
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

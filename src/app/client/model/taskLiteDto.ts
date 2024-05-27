@@ -29,10 +29,7 @@ export interface TaskLiteDto {
      * Priority of the task
      */
     priority: Priority;
-    /**
-     * Id of the assigned
-     */
-    assigned_user_id: number;
+    assigned_user_id?: number | null;
     /**
      * Completed task
      */

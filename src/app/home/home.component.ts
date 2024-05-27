@@ -54,7 +54,10 @@ export class HomeComponent implements OnInit {
       height: '400px',
       width: '600px',
     });
-    this.dialogRef.afterClosed().subscribe(result => result && this.homeStore.createWorkspace(result))
+    this.dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      result && this.homeStore.createWorkspace(result)
+    })
   }
 
   openWorkspace(id: number): void {

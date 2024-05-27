@@ -17,10 +17,7 @@ export interface CreateProjectRequest {
      */
     name: string;
     description?: string | null;
-    /**
-     * A color that is convenient for the user to identify the project
-     */
-    tint: string;
+    tint?: string | null;
     /**
      * Project workspace id
      */

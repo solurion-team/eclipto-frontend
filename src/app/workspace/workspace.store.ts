@@ -55,7 +55,7 @@ export class WorkspaceStore extends ComponentStore<WorkspaceState> implements On
         tapResponse(
           (projectInfoDtos) => {
             const projectCardStates = projectInfoDtos.map<ProjectCardState>((projectInfo) => {
-              return {...projectInfo, iconColor: "blue", isSelected: false}
+              return {...projectInfo, iconColor: projectInfo.tint, isSelected: false}
             })
             this.patchState((state) =>
               ({id: workspaceId, sidebarState: {...state.sidebarState, projectCards: projectCardStates, isLoading: false}})
@@ -78,14 +78,13 @@ export class WorkspaceStore extends ComponentStore<WorkspaceState> implements On
           description: projectData.description,
           lead_id: this.credentialsService.userId,
           workspace_id: workspaceId,
-          tint: "#035efc"
         }).pipe(
           tapResponse(
             (projectInfoDto) => {
               this.patchState((state) => ({
                 sidebarState: {
                   ...state.sidebarState,
-                  projectCards: [...state.sidebarState.projectCards, {...projectInfoDto, iconColor: "blue", isSelected: false}]
+                  projectCards: [...state.sidebarState.projectCards, {...projectInfoDto, iconColor: projectInfoDto.tint, isSelected: false}]
                 }})
               )
               this.openProject(projectInfoDto.id)

@@ -2,16 +2,13 @@
   margin-top: 20px;
 }
 
-form {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+/*form {*/
+/*  margin-top: 20px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  height: 100%;*/
+/*}*/
 
-mat-form-field {
-  width: 100%;
-}
 
 button {
   margin-right: 10px;
@@ -22,31 +19,81 @@ button {
 
 mat-card {
   width: 50%;
-  margin: 0;
-  padding: 0;
 }
 
-mat-dialog-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+/*mat-dialog-container {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  height: 100%;*/
+/*}*/
 
 mat-dialog-content {
-  /*background-color: #008080; !* Бирюзовый цвет *!*/
   flex: 1;
+  min-height: 300px;
+  max-height: 500px;
+  overflow: hidden;
+}
+
+form {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /*background-color: #8eafec;*/
+  height: 100%;
+  width: 100%;
+  gap: 20px;
   overflow: auto;
-  min-height: 450px;
+}
+
+.left {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.for-description {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.gpt {
+  width: 42px;
+  margin-bottom: 20px;
+}
+
+.description {
+  width: 400px;
+}
+
+
+/*.field-from-left {*/
+/*  height: 60%;*/
+/*}*/
+
+.right {
+  /*background-color: #9900ff;*/
+  width: 50%;
+  height: 100%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.field-from-right {
+  width: 100%;
 }
 
 mat-dialog-actions {
-  /*background-color: #9900ff; !* Фиолетовый цвет *!*/
   margin: 0;
   padding: 10px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: flex-start;
+  display: inline-flex;
+  flex-direction: row;
+  /*justify-content: flex-start;*/
   flex-shrink: 0;
+  position: relative;
 }
 
 .button-for-date {
@@ -54,18 +101,22 @@ mat-dialog-actions {
   text-align: left !important;
 }
 
-.button-for-save {
-  width: 50%;
+.button-create {
+  position: absolute;
+  right: 0;
 }
 
 mat-calendar {
   margin-top: 30px;
-  color: #3131ff;
-  height: 30%;
+  height: 50%;
 }
 
 mat-checkbox {
   margin-bottom: 10px;
+}
+
+.generation {
+  width: 70%;
 }
 
 /*.mat-checkbox-checked.mat-accent .mat-checkbox-checkmark-path {*/

@@ -4,7 +4,7 @@ import {
   MAT_DIALOG_DATA, MatDialogActions, MatDialogContent,
   MatDialogRef, MatDialogTitle
 } from "@angular/material/dialog";
-import { MatButton } from "@angular/material/button";
+import {MatButton, MatMiniFabButton} from "@angular/material/button";
 import { MatFormField, MatHint, MatLabel } from "@angular/material/form-field";
 import { MatInput } from "@angular/material/input";
 import { MatOption, MatSelect } from "@angular/material/select";
@@ -15,6 +15,7 @@ import { MatCard } from "@angular/material/card";
 import { DatePipe, NgIf } from "@angular/common";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import {MatCheckbox} from "@angular/material/checkbox";
+import {MatButtonToggle} from "@angular/material/button-toggle";
 
 export interface TaskData {
   id?: number;
@@ -63,7 +64,9 @@ export interface AddTaskDialogResult {
     MatDialogContent,
     MatDialogTitle,
     MatLabel,
-    MatCheckbox
+    MatCheckbox,
+    MatButtonToggle,
+    MatMiniFabButton
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-task-dialog.component.html',

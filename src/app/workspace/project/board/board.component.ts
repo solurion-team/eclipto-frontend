@@ -92,7 +92,7 @@ export class BoardComponent implements OnInit {
 
   openAddTaskDialog(taskStatusId: number, taskData?: TaskData) {
     this.addTaskDialogRef = this.dialog.open(AddTaskDialogComponent, {
-      height: '600px',
+      height: '550px',
       width: '1000px',
       data: { taskStatusId: taskStatusId, taskData: taskData }
     });

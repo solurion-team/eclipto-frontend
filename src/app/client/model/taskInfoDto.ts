@@ -37,18 +37,9 @@ export interface TaskInfoDto {
     priority: Priority;
     due_date?: string | null;
     assigned_user_id?: number | null;
-    /**
-     * Id of the reporter
-     */
-    reporter_user_id: number;
-    /**
-     * created_at
-     */
-    created_at: string;
-    /**
-     * updated_at
-     */
-    updated_at: string;
+    reporter_user_id?: number | null;
+    created_at?: string | null;
+    updated_at?: string | null;
     /**
      * Completed task
      */

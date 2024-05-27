@@ -14,14 +14,15 @@ import { MatIcon } from "@angular/material/icon";
 import { MatCard } from "@angular/material/card";
 import { DatePipe, NgIf } from "@angular/common";
 import { provideNativeDateAdapter } from "@angular/material/core";
+import { MatCheckboxModule } from '@angular/material/checkbox'; // Добавьте этот импорт
 
 export interface TaskData {
   id?: number;
   title: string;
-  description: string | null | undefined ;
+  description: string | null | undefined;
   isCompleted: boolean;
   priority: Priority;
-  assignedUserId?: number | null | undefined ;
+  assignedUserId?: number | null | undefined;
   taskStatusId: number;
   date?: Date;
 }
@@ -50,7 +51,8 @@ export interface AddTaskDialogResult {
     MatDialogActions,
     MatDialogContent,
     MatDialogTitle,
-    MatLabel
+    MatLabel,
+    MatCheckboxModule
   ],
   providers: [provideNativeDateAdapter()],
   templateUrl: './add-task-dialog.component.html',
@@ -63,7 +65,8 @@ export class AddTaskDialogComponent implements OnInit {
     title: new FormControl('', [Validators.required, Validators.minLength(1)]),
     description: new FormControl('', []),
     priority: new FormControl<Priority>('medium', [Validators.required]),
-    date: new FormControl<Date | null>(null)
+    date: new FormControl<Date | null>(null),
+    isCompleted: new FormControl(false)
   });
 
   constructor(
@@ -77,7 +80,8 @@ export class AddTaskDialogComponent implements OnInit {
         title: this.data.taskData.title,
         description: this.data.taskData.description,
         priority: this.data.taskData.priority,
-        date: this.data.taskData.date
+        date: this.data.taskData.date,
+        isCompleted: this.data.taskData.isCompleted
       });
     }
   }
@@ -86,22 +90,22 @@ export class AddTaskDialogComponent implements OnInit {
     const addTaskData: TaskData = {
       title: this.taskForm.value.title!,
       description: this.taskForm.value.description!,
-      isCompleted: false,
+      isCompleted: this.taskForm.value.isCompleted!,
       priority: this.taskForm.value.priority!,
       date: this.taskForm.value.date!,
       taskStatusId: this.data.taskStatusId
     };
-    console.log(addTaskData)
+
     if (this.data.taskData) {
       addTaskData.id = this.data.taskData.id!;
       if (addTaskData === this.data.taskData) {
         this.dialogRef.close();
-        return
+        return;
       }
-      this.dialogRef.close(<AddTaskDialogResult>{update: true, taskData: addTaskData});
-      return
+      this.dialogRef.close(<AddTaskDialogResult>{ update: true, taskData: addTaskData });
+      return;
     }
-    this.dialogRef.close(<AddTaskDialogResult>{update: false, taskData: addTaskData});
+    this.dialogRef.close(<AddTaskDialogResult>{ update: false, taskData: addTaskData });
   }
 
   closeDialog() {
@@ -112,11 +116,10 @@ export class AddTaskDialogComponent implements OnInit {
     this.calendarVisible = true;
   }
 
-  saveDate(date: Date | undefined | null ) {
+  saveDate(date: Date | undefined | null) {
     if (date) {
       this.taskForm.patchValue({ date: date });
       this.calendarVisible = false;
     }
   }
 }
-

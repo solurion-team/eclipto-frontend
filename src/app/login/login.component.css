@@ -44,12 +44,11 @@
   margin-bottom: 16px;
 }
 
-.button {
-  margin-top: 20px;
-  &.mat-raised-button[disabled] {
-    background-color: rgba(0, 0, 0, 0.12);
-    color: rgba(255, 255, 255, 0.3);
-  }
+::ng-deep .mat-raised-button[disabled] {
+  background-color: #e0e0e0 !important; /* Цвет фона */
+  color: #9e9e9e !important;          /* Цвет текста */
+  border: 1px solid #bdbdbd !important; /* Цвет границы */
+  opacity: 1 !important;              /* Установить непрозрачность */
 }
 
 .log-in {

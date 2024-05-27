@@ -156,7 +156,30 @@
   margin-top: 10px;
 }
 
-.task-card.completed {
+.completed {
   background-color: #e0ffe0;
-  /*border: 1px solid #a0ffa0;*/
 }
+
+.filter {
+  color: white;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.filter-radio-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.task-card.completed {
+  border: 2px solid blue;
+  background-color: lightblue;
+}
+
+
+

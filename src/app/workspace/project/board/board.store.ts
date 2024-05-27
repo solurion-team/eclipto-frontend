@@ -111,7 +111,8 @@ export class BoardStore extends ComponentStore<BoardState> implements OnDestroy 
         priority: taskData.priority,
         due_date: taskData.date ? taskData.date.toISOString() : null,
         reporter_user_id: this.credentialsService.userId,
-        project_id: projectId!
+        project_id: projectId!,
+        // isCompleted: taskData.isCompleted,
       }).pipe(
         tapResponse(
           (taskLiteDto) => {

@@ -59,5 +59,7 @@
   gap: 15px;
 }
 
-
+.square {
+  border-radius: 100%;
+}
 

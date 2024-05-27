@@ -63,3 +63,11 @@ mat-calendar {
   color: #3131ff;
   height: 30%;
 }
+
+mat-checkbox {
+  margin-bottom: 10px;
+}
+
+/*.mat-checkbox-checked.mat-accent .mat-checkbox-checkmark-path {*/
+/*  stroke: #00f7ff !important;
+/*}*/

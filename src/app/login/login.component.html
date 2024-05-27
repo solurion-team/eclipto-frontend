@@ -19,14 +19,14 @@
         <input matInput formControlName="password" type="password" placeholder="Введите пароль" required>
       </mat-form-field>
 
-      <button mat-raised-button type="submit" color="basic" [disabled]="loginForm.invalid">
-        Продолжить
+      <button mat-raised-button color="primary" class="submit-button" [disabled]="loginForm.invalid" type="submit">
+        Войти
       </button>
 
       <mat-button-toggle routerLink="/register" color="primary" class="log-in">
         Зарегистрироваться
       </mat-button-toggle>
     </form>
-
   </div>
 </div>
+

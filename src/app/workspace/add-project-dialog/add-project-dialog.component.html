@@ -1,15 +1,3 @@
-<!--<dialog #modal>-->
-<!--  <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">-->
-<!--    <input type="text" class="name-project" formControlName="name" placeholder="Название проекта">-->
-<!--    <input type="text" class="project-description" formControlName="description" placeholder="Описание проекта">-->
-<!--    <div class="button-container">-->
-<!--      <button class="button-for-close" type="button" (click)="closeModal()">Close</button>-->
-<!--      <button class="button-for-submit" type="submit" value="send">Submit</button>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--</dialog>-->
-
-
 <mat-dialog-content>
   <h2 mat-dialog-title>Create new project</h2>
   <form [formGroup]="projectForm" (ngSubmit)="submitForm()">

@@ -129,6 +129,7 @@ export class BoardComponent implements OnInit {
   }
 
   editTask(id: number) {
+    console.log("sss" + id)
     this.boardStore.loadTaskData(id)
   }
 

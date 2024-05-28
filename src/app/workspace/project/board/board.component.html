@@ -35,7 +35,7 @@
               <div
                 class="task-card"
                 [class.completed]="task.isCompleted"
-                [ngClass]="{'selected': task.isCompleted}"
+                [class.selected]="task.isCompleted"
                 cdkDrag
                 [cdkDragData]="task"
                 (click)="editTask(task.id)">

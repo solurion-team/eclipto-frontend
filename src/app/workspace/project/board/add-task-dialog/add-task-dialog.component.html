@@ -14,7 +14,7 @@
           <textarea matInput formControlName="description" placeholder="Описание проекта"></textarea>
         </mat-form-field>
 
-        <button type="button" class="gpt" mat-mini-fab color="basic">
+        <button type="button" class="gpt" mat-mini-fab color="basic" (click)="generateDescription()">
           <mat-icon>auto_awesome</mat-icon>
         </button>
       </div>

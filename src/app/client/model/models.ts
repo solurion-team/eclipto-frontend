@@ -10,6 +10,8 @@ export * from './projectAuthorityDto';
 export * from './projectInfoDto';
 export * from './projectPrivilege';
 export * from './registerRequest';
+export * from './taskDescriptionRequest';
+export * from './taskDescriptionResult';
 export * from './taskInfoDto';
 export * from './taskLiteDto';
 export * from './taskStatusDto';

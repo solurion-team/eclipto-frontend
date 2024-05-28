@@ -20,6 +20,8 @@ model/projectAuthorityDto.ts
 model/projectInfoDto.ts
 model/projectPrivilege.ts
 model/registerRequest.ts
+model/taskDescriptionRequest.ts
+model/taskDescriptionResult.ts
 model/taskInfoDto.ts
 model/taskLiteDto.ts
 model/taskStatusDto.ts

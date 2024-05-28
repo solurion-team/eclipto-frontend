@@ -16,6 +16,7 @@ import { DatePipe, NgIf } from "@angular/common";
 import { provideNativeDateAdapter } from "@angular/material/core";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {MatButtonToggle} from "@angular/material/button-toggle";
+import {TaskService} from "../../../../client/api/task.service";
 
 export interface TaskData {
   id?: number;
@@ -86,7 +87,8 @@ export class AddTaskDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { taskStatusId: number, taskData?: TaskData },
-    private readonly dialogRef: MatDialogRef<AddTaskDialogComponent>
+    private readonly dialogRef: MatDialogRef<AddTaskDialogComponent>,
+    private readonly taskService: TaskService
   ) { }
 
   ngOnInit(): void {
@@ -135,6 +137,12 @@ export class AddTaskDialogComponent implements OnInit {
       this.taskForm.patchValue({ date: date });
       this.calendarVisible = false;
     }
+  }
+
+  generateDescription() {
+    this.taskService.getTaskDescription({title: this.taskForm.value.title!}).subscribe({
+      next: result => this.taskForm.patchValue({ description: result.description })
+    })
   }
 }
 
